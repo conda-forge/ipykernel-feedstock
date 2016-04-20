@@ -10,12 +10,17 @@ source:
   md5: 971eee85d630eb4bafcd52531c79673f
 
 build:
-  number: 0
-  script: python setup.py install
+  number: 1
+  script:
+    - python setup.py install
+    - python -m ipykernel install --prefix $PREFIX  # [not win]
+    - python -m ipykernel install --prefix %PREFIX%  # [win]
 
 requirements:
   build:
     - python
+    - jupyter_client
+    - ipython >=4.0
   run:
     - python
     - ipython >=4.0
