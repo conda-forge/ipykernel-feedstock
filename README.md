@@ -5,7 +5,7 @@ Home: http://ipython.org
 
 Package license: BSD 3-clause
 
-Feedstock license: BSD
+Feedstock license: BSD 3-Clause
 
 Summary: IPython Kernel for Jupyter
 
