@@ -15,6 +15,9 @@ build:
     - python setup.py install
     - python -m ipykernel install --prefix $PREFIX  # [not win]
     - python -m ipykernel install --prefix %PREFIX%  # [win]
+  has_prefix_files:
+    - share/jupyter/kernels/python2/kernel.json  # [py2k]
+    - share/jupyter/kernels/python3/kernel.json  # [py3k]
 
 requirements:
   build:
