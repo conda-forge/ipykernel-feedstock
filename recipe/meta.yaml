@@ -1,4 +1,4 @@
-{% set version = "4.3.1" %}
+{% set version = "4.4.1" %}
 
 package:
   name: ipykernel
@@ -6,21 +6,23 @@ package:
 
 source:
   fn: ipykernel-{{ version }}.tar.gz
-  url: https://github.com/ipython/ipykernel/archive/{{ version }}.tar.gz
-  md5: 971eee85d630eb4bafcd52531c79673f
+  url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
+  sha256: 6d48398b3112efb733b254edede4b7f3262c28bd19f665b64ef1acf6ec5cd74f
 
 build:
-  number: 1
+  number: 0
   script:
-    - python setup.py install
+    - pip install --no-deps .
     - python -m ipykernel install --prefix $PREFIX  # [not win]
     - python -m ipykernel install --prefix %PREFIX%  # [win]
 
 requirements:
   build:
+    - pip
     - python
     - jupyter_client
     - ipython >=4.0
+    - tornado >=4.0
   run:
     - python
     - ipython >=4.0
