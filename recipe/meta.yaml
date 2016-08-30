@@ -18,6 +18,7 @@ build:
 
 requirements:
   build:
+    - pip
     - python
     - jupyter_client
     - ipython >=4.0
