@@ -11,6 +11,18 @@ Summary: IPython Kernel for Jupyter
 
 
 
+Current build status
+====================
+
+Linux: [![Circle CI](https://circleci.com/gh/conda-forge/ipykernel-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/ipykernel-feedstock)
+OSX: [![TravisCI](https://travis-ci.org/conda-forge/ipykernel-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/ipykernel-feedstock)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/ipykernel-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/ipykernel-feedstock/branch/master)
+
+Current release info
+====================
+Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/ipykernel/badges/version.svg)](https://anaconda.org/conda-forge/ipykernel)
+Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/ipykernel/badges/downloads.svg)](https://anaconda.org/conda-forge/ipykernel)
+
 Installing ipykernel
 ====================
 
@@ -66,18 +78,6 @@ Terminology
 
 **conda-forge** - the place where the feedstock and smithy live and work to
                   produce the finished article (built conda distributions)
-
-Current build status
-====================
-
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/ipykernel-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/ipykernel-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/ipykernel-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/ipykernel-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/ipykernel-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/ipykernel-feedstock/branch/master)
-
-Current release info
-====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/ipykernel/badges/version.svg)](https://anaconda.org/conda-forge/ipykernel)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/ipykernel/badges/downloads.svg)](https://anaconda.org/conda-forge/ipykernel)
 
 
 Updating ipykernel-feedstock
