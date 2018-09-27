@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py2k]
+  noarch: python
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
     - python -m ipykernel install --prefix {{ PREFIX }}
@@ -18,12 +18,12 @@ build:
 requirements:
   build:
     - pip
-    - python
+    - python >=3
     - jupyter_client
     - ipython >=4.0
     - tornado >=4.0
   run:
-    - python
+    - python >=3
     - ipython >=5.0
     - traitlets >=4.1
     - jupyter_client
