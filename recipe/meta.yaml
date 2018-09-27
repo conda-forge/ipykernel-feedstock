@@ -1,4 +1,4 @@
-{% set version = "4.9.0" %}
+{% set version = "4.10.0" %}
 
 package:
   name: ipykernel
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: c5a498c70f7765c34f3397cf943b069057f5bef4e0218e4cfbb733e9f38fa5fa
+  sha256: 699103c8e64886e3ec7053f2a6aa83bb90426063526f63a818732ff385202bad
 
 build:
   number: 0
@@ -34,7 +34,7 @@ test:
     - ipykernel
 
 about:
-  home: http://ipython.org
+  home: https://ipython.org
   license: BSD 3-clause
   license_file: COPYING.md
   summary: IPython Kernel for Jupyter
@@ -46,3 +46,4 @@ extra:
     - minrk
     - ocefpaf
     - blink1073
+    - Carreau
