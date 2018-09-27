@@ -1,4 +1,4 @@
-{% set version = "4.10.0" %}
+{% set version = "5.0.0" %}
 
 package:
   name: ipykernel
@@ -6,10 +6,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 699103c8e64886e3ec7053f2a6aa83bb90426063526f63a818732ff385202bad
+  sha256: 3e0ffdf545c0bf80d9dab6523ec6829831408c474772487aeb6eb9f0348b6a1e
 
 build:
   number: 0
+  skip: True  # [py2k]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
     - python -m ipykernel install --prefix $PREFIX  # [not win]
@@ -24,7 +25,7 @@ requirements:
     - tornado >=4.0
   run:
     - python
-    - ipython >=4.0
+    - ipython >=5.0
     - traitlets >=4.1
     - jupyter_client
     - tornado >=4.0
