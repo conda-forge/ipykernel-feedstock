@@ -1,7 +1,7 @@
 About ipykernel
 ===============
 
-Home: http://ipython.org
+Home: https://ipython.org
 
 Package license: BSD 3-clause
 

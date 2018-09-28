@@ -9,11 +9,10 @@ source:
   sha256: 699103c8e64886e3ec7053f2a6aa83bb90426063526f63a818732ff385202bad
 
 build:
-  number: 0
+  number: 1
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
-    - python -m ipykernel install --prefix $PREFIX  # [not win]
-    - python -m ipykernel install --prefix %PREFIX%  # [win]
+    - python -m ipykernel install --prefix {{ PREFIX }}
 
 requirements:
   build:
