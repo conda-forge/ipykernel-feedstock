@@ -9,41 +9,53 @@ source:
   sha256: 3e0ffdf545c0bf80d9dab6523ec6829831408c474772487aeb6eb9f0348b6a1e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
     - python -m ipykernel install --prefix {{ PREFIX }}
 
 requirements:
-  build:
-    - pip
-    - python >=3
-    - jupyter_client
-    - ipython >=4.0
-    - tornado >=4.0
-  run:
-    - python >=3
+  host:
     - ipython >=5.0
-    - traitlets >=4.1
     - jupyter_client
+    - pip
+    - python >=3.4
+  run:
+    - ipython >=5.0
+    - jupyter_client
+    - python >=3.4
     - tornado >=4.0
+    - traitlets >=4.1
 
 test:
+  requires:
+    - curio  # [unix]
+    - matplotlib
+    - nose
+    - numpy
+    - pytest
+    - trio
   imports:
     - ipykernel
+  commands:
+    - jupyter kernelspec list
+    - pytest --pyargs ipykernel
 
 about:
   home: https://ipython.org
-  license: BSD 3-clause
+  license: BSD-3-Clause
   license_file: COPYING.md
   summary: IPython Kernel for Jupyter
+  dev_url: https://github.com/ipython/ipykernel
+  doc_url: https://ipython.readthedocs.io
 
 extra:
   recipe-maintainers:
+    - blink1073
+    - bollwyvl
+    - Carreau
     - jakirkham
-    - pelson
     - minrk
     - ocefpaf
-    - blink1073
-    - Carreau
+    - pelson
