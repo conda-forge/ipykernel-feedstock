@@ -1,5 +1,8 @@
 {% set version = "5.1.0" %}
 
+{% set test_args = "" %}  # [unix]
+{% set test_args = "-k 'not test_async'" %}  # [win]
+
 package:
   name: ipykernel
   version: {{ version }}
@@ -39,7 +42,7 @@ test:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel
+    - pytest  --pyargs ipykernel.tests {{ test_args }}
 
 about:
   home: https://ipython.org
