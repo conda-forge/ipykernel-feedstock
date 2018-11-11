@@ -9,8 +9,8 @@ source:
   sha256: 0fc0bf97920d454102168ec2008620066878848fcfca06c22b669696212e292f
 
 build:
-  number: 0
-  noarch: python
+  number: 1
+  skip: True  # [py<34]
   script:
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
     - python -m ipykernel install --prefix {{ PREFIX }}
@@ -20,11 +20,11 @@ requirements:
     - ipython >=5.0
     - jupyter_client
     - pip
-    - python >=3.4
+    - python
   run:
     - ipython >=5.0
     - jupyter_client
-    - python >=3.4
+    - python
     - tornado >=4.0
     - traitlets >=4.1
 
