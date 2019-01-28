@@ -9,10 +9,10 @@ source:
   sha256: 0fc0bf97920d454102168ec2008620066878848fcfca06c22b669696212e292f
 
 build:
-  number: 1001
+  number: 1002
   skip: True  # [py<34]
   script:
-    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+    - "{{ PYTHON }} -m pip install . --no-deps -vv"
     - python -m ipykernel install --prefix {{ PREFIX }}
 
 requirements:
@@ -45,10 +45,15 @@ test:
 about:
   home: https://ipython.org
   license: BSD-3-Clause
+  license_family: BSD
   license_file: COPYING.md
   summary: IPython Kernel for Jupyter
+  description: |
+    A powerful interactive Python shell and a Jupyter kernel to work with
+    Python code in Jupyter notebooks and other interactive frontends.
   dev_url: https://github.com/ipython/ipykernel
   doc_url: https://ipython.readthedocs.io
+  doc_source_url: https://github.com/ipython/ipykernel/blob/master/docs/index.rst
 
 extra:
   recipe-maintainers:
