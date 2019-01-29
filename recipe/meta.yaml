@@ -36,6 +36,8 @@ test:
     - numpy
     - pytest
     - trio
+    # TODO: investigate upstream and unpin when fixed
+    - ipython <7.2
   imports:
     - ipykernel
   commands:
