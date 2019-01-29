@@ -12,9 +12,10 @@ build:
   number: 1002
   skip: True  # [py<34]
   script:
-    - "{{ PYTHON }} setup.py bdist_wheel"
-    - "{{ PYTHON }} -m pip install dist/ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv"
-    - "{{ PYTHON }} -m ipykernel install --prefix {{ PREFIX }}"
+    - {{ PYTHON }} setup.py bdist_wheel
+    - cd dist
+    - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
+    - {{ PYTHON }} -m ipykernel install --prefix {{ PREFIX }}
 
 requirements:
   host:
