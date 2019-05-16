@@ -43,7 +43,7 @@ test:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel
+    - pytest --pyargs ipykernel  # [unix]
 
 about:
   home: https://ipython.org
