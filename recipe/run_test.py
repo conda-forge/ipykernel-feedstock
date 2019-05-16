@@ -20,9 +20,7 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
 
 if os.name == "nt":
     # as of ipykernel 5.1.0, a number of async tests fail
-    # as of ipykernel 5.1.1, an embed test fails on 3.6
     # `pytest --pyargs` doesn't work properly with `-k` or `--ignore`
-    from ipykernel.tests import test_async, test_embed_kernel
+    from ipykernel.tests import test_async
     print("Windows: Removing", test_async.__file__)
     os.unlink(test_async.__file__)
-    os.unlink(test_embed_kernel.__file__)
