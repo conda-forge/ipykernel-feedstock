@@ -1,4 +1,4 @@
-{% set version = "5.1.0" %}
+{% set version = "5.1.1" %}
 
 package:
   name: ipykernel
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 0fc0bf97920d454102168ec2008620066878848fcfca06c22b669696212e292f
+  sha256: f0e962052718068ad3b1d8bcc703794660858f58803c3798628817f492a8769c
 
 build:
-  number: 1002
+  number: 0
   skip: True  # [py<34]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
@@ -38,13 +38,12 @@ test:
     - numpy
     - pytest
     - trio
-    # TODO: investigate upstream and unpin when fixed
-    - ipython <7.2
+    - ipython
   imports:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel
+    - pytest --pyargs ipykernel  # [unix]
 
 about:
   home: https://ipython.org
