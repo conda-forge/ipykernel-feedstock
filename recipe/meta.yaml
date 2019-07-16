@@ -33,11 +33,9 @@ requirements:
 test:
   requires:
     - curio  # [unix]
-    - matplotlib
     - nose
     - numpy
     - pytest
-    - trio
     - ipython
   imports:
     - ipykernel
