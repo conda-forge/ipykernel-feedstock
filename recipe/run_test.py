@@ -19,10 +19,11 @@ spec = json.loads(raw_spec)
 print('\nChecking python executable', spec['argv'][0], '...')
 
 if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
-    raise ValueError('The kernelspec seems to have the wrong prefix. \n'
-                     'Specfile: {}\n'
-                     'Expected: {}'
-                     ''.format(spec['argv'][0], sys.executable))
+    print('The kernelspec seems to have the wrong prefix. \n'
+          'Specfile: {}\n'
+          'Expected: {}'
+           ''.format(spec['argv'][0], sys.executable))
+    sys.exit(1)
 
 if os.name == 'nt':
     # as of ipykernel 5.1.0, a number of async tests fail

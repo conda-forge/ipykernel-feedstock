@@ -15,7 +15,7 @@ build:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
     - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
-    - {{ PYTHON }} -m ipykernel install --prefix {{ PREFIX }}
+    - {{ PYTHON }} -m ipykernel install --prefix "{{ PREFIX }}"
 
 requirements:
   host:
