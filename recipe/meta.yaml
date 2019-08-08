@@ -40,8 +40,6 @@ test:
   imports:
     - ipykernel
   commands:
-    - dir "%PREFIX%\.conda-build-pre-test-passed"  # [win]
-    - ls "$PREFIX/.conda-build-pre-test-passed"  # [unix]
     - jupyter kernelspec list
     - pytest --pyargs ipykernel  # [unix]
 
