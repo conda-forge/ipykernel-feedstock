@@ -15,7 +15,7 @@ build:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
     - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
-    - {{ PYTHON }} -m ipykernel install --prefix "{{ PREFIX }}"
+    - {{ PYTHON }} -m ipykernel install --sys-prefix
 
 requirements:
   host:
@@ -27,7 +27,7 @@ requirements:
     - ipython >=5.0
     - jupyter_client
     - python
-    - tornado >=4.0
+    - tornado >=4.2
     - traitlets >=4.1
 
 test:
@@ -40,6 +40,8 @@ test:
   imports:
     - ipykernel
   commands:
+    - dir "%PREFIX%\.conda-build-pre-test-passed"  # [win]
+    - ls "$PREFIX/.conda-build-pre-test-passed"  # [unix]
     - jupyter kernelspec list
     - pytest --pyargs ipykernel  # [unix]
 

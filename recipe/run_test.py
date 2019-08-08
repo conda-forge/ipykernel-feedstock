@@ -31,3 +31,8 @@ if os.name == 'nt':
     from ipykernel.tests import test_async
     print('Windows: Removing', test_async.__file__)
     os.unlink(test_async.__file__)
+
+canary = os.path.join(os.environ['PREFIX'], '.conda-build-pre-test-passed')
+print('Writing Canary File...', canary)
+with open(canary, "w+") as fp:
+    fp.write('OK')
