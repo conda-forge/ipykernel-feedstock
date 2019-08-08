@@ -1,4 +1,4 @@
-{% set version = "5.1.1" %}
+{% set version = "5.1.2" %}
 
 package:
   name: ipykernel
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: f0e962052718068ad3b1d8bcc703794660858f58803c3798628817f492a8769c
+  sha256: b503913e0b4cce7ed2de965457dfb2edd633e8234161a60e23f2fe2161345d12
 
 build:
   number: 0
@@ -15,7 +15,7 @@ build:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
     - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
-    - {{ PYTHON }} -m ipykernel install --prefix {{ PREFIX }}
+    - {{ PYTHON }} -m ipykernel install --sys-prefix
 
 requirements:
   host:
@@ -27,7 +27,7 @@ requirements:
     - ipython >=5.0
     - jupyter_client
     - python
-    - tornado >=4.0
+    - tornado >=4.2
     - traitlets >=4.1
 
 test:

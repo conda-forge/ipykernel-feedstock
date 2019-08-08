@@ -31,13 +31,6 @@ Current build status
         <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/master.svg?label=Linux">
       </a>
     </td>
-  </tr><tr>
-    <td>Appveyor</td>
-    <td>
-      <a href="https://ci.appveyor.com/project/conda-forge/ipykernel-feedstock/branch/master">
-        <img alt="windows" src="https://img.shields.io/appveyor/ci/conda-forge/ipykernel-feedstock/master.svg?label=Windows">
-      </a>
-    </td>
   </tr>
     
   <tr>
