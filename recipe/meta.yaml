@@ -37,6 +37,7 @@ test:
     - numpy
     - pytest
     - ipython
+    - flaky
   imports:
     - ipykernel
   commands:
