@@ -13,13 +13,15 @@ steps:
     CONFIG: linux_aarch64_python3.6
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    #BINSTAR_TOKEN: ""
+    BINSTAR_TOKEN: 
+      from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
+    - export GIT_BRANCH="$DRONE_BRANCH"
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
-    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.drone/build_steps.sh
+    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
 
 ---
@@ -37,12 +39,14 @@ steps:
     CONFIG: linux_aarch64_python3.7
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    #BINSTAR_TOKEN: ""
+    BINSTAR_TOKEN: 
+      from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
+    - export GIT_BRANCH="$DRONE_BRANCH"
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
-    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.drone/build_steps.sh
+    - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
 
