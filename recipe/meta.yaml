@@ -42,7 +42,7 @@ test:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel  # [unix]
+    - pytest --pyargs ipykernel -m "not flaky" # [not win]
 
 about:
   home: https://ipython.org
