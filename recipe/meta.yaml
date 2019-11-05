@@ -42,7 +42,8 @@ test:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel  # [unix]
+    - pytest --pyargs ipykernel -m "not flaky"  # [linux]
+    - pytest --pyargs ipykernel -m "not flaky" -k "not (test_subprocess_error or test_subprocess_print)"  # [osx]
 
 about:
   home: https://ipython.org
