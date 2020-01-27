@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<34]
+  noarch: python
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
@@ -22,17 +22,17 @@ requirements:
     - ipython >=5.0
     - jupyter_client
     - pip
-    - python
+    - python >=3.4
   run:
     - ipython >=5.0
     - jupyter_client
-    - python
+    - python >=3.4
     - tornado >=4.2
     - traitlets >=4.1
 
 test:
   requires:
-    - curio  # [unix]
+    - curio
     - nose
     - numpy
     - pytest
@@ -42,8 +42,7 @@ test:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel -m "not flaky"  # [linux]
-    - pytest --pyargs ipykernel -m "not flaky" -k "not (test_subprocess_error or test_subprocess_print)"  # [osx]
+    - pytest --pyargs ipykernel -m "not flaky" -k "not (test_subprocess_error or test_subprocess_print)"
 
 about:
   home: https://ipython.org
