@@ -32,17 +32,17 @@ requirements:
 
 test:
   requires:
-    - curio  # [unix]
+    - curio
     - nose
     - numpy
-    - pytest
+    - pytest !=5.3.4
     - ipython
     - flaky
   imports:
     - ipykernel
   commands:
     - jupyter kernelspec list
-    - pytest --pyargs ipykernel -m "not flaky"  # [linux]
+    - pytest --pyargs ipykernel -m "not flaky"  # [not osx]
     - pytest --pyargs ipykernel -m "not flaky" -k "not (test_subprocess_error or test_subprocess_print)"  # [osx]
 
 about:
