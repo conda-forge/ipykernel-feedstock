@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import pytest
 
 
 py_major = sys.version_info[0]
@@ -25,9 +26,20 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
            ''.format(spec['argv'][0], sys.executable))
     sys.exit(1)
 
-if os.name == 'nt':
-    # as of ipykernel 5.1.0, a number of async tests fail
-    # `pytest --pyargs` doesn't work properly with `-k` or `--ignore`
-    from ipykernel.tests import test_async
-    print('Windows: Removing', test_async.__file__)
-    os.unlink(test_async.__file__)
+if sys.platform.startswith("win") and sys.version_info >= (3, 8):
+    import asyncio
+    try:
+        from asyncio import (
+            WindowsProactorEventLoopPolicy,
+            WindowsSelectorEventLoopPolicy,
+        )
+    except ImportError:
+        pass
+        # not affected
+    else:
+        if type(asyncio.get_event_loop_policy()) is WindowsProactorEventLoopPolicy:
+            # WindowsProactorEventLoopPolicy is not compatible with tornado 6
+            # fallback to the pre-3.8 default of Selector
+            asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
+
+sys.exit(pytest.main(["-m", "not flaky"]))
