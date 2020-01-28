@@ -33,11 +33,12 @@ requirements:
 test:
   requires:
     - curio
+    - flaky
+    - ipython
     - nose
     - numpy
     - pytest !=5.3.4
-    - ipython
-    - flaky
+    - pytest-cov
   imports:
     - ipykernel
   commands:

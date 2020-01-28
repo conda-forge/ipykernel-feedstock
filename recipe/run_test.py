@@ -42,4 +42,4 @@ if sys.platform.startswith("win") and sys.version_info >= (3, 8):
             # fallback to the pre-3.8 default of Selector
             asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
 
-sys.exit(pytest.main(["-m", "not flaky"]))
+sys.exit(pytest.main(["-m", "not flaky", "--pyargs", "ipykernel", "--cov", "ipykernel", "-v"]))
