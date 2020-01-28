@@ -26,7 +26,7 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
            ''.format(spec['argv'][0], sys.executable))
     sys.exit(1)
 
-pytest_args = ["-m", "not flaky", "--pyargs", "ipykernel", "--cov", "ipykernel", "-v"]
+pytest_args = ["-m", "not flaky", "--pyargs", "ipykernel"]
 
 # reproduced here so we don't import it
 if sys.platform.startswith("win") and sys.version_info >= (3, 8):

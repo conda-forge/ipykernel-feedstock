@@ -38,7 +38,6 @@ test:
     - nose
     - numpy
     - pytest !=5.3.4
-    - pytest-cov
   imports:
     - ipykernel
   commands:
