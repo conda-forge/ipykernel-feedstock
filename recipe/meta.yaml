@@ -11,13 +11,12 @@ source:
 build:
   number: 1
   skip: True  # [py<34]
-  has_prefix_files:
-    - share/jupyter/kernels/python3/kernel.json
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
     - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
     - {{ PYTHON }} -m ipykernel install --sys-prefix
+    - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py  # [win]
 
 requirements:
   host:
