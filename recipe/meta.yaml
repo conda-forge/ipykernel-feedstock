@@ -16,7 +16,7 @@ build:
     - cd dist
     - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
     - {{ PYTHON }} -m ipykernel install --sys-prefix
-    # - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
+    - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
 
 requirements:
   host:
