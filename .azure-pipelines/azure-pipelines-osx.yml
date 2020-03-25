@@ -22,6 +22,7 @@ jobs:
       osx_numpy1.18python3.6.____73_pypy:
         CONFIG: osx_numpy1.18python3.6.____73_pypy
         UPLOAD_PACKAGES: True
+
   steps:
   # TODO: Fast finish on azure pipelines?
   - script: |
