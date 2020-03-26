@@ -22,12 +22,12 @@ build:
 requirements:
   host:
     - ipython >=5.0
-    - jupyter_client <6.0.0a0
+    - jupyter_client
     - pip
     - python
   run:
     - ipython >=5.0
-    - jupyter_client <6.0.0a0
+    - jupyter_client
     - python
     - tornado >=4.2
     - traitlets >=4.1
