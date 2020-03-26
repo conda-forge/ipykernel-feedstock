@@ -6,8 +6,8 @@ import pytest
 
 
 py_major = sys.version_info[0]
-py_impl = platform.python_implementation()
-print("Python implementation", py_impl)
+py_impl = platform.python_implementation().lower()
+print("Python implementation:", py_impl)
 specfile = os.path.join(os.environ['PREFIX'], 'share', 'jupyter', 'kernels',
                         'python{}'.format(py_major), 'kernel.json')
 
@@ -53,9 +53,10 @@ if sys.platform == "darwin":
     pytest_args += ["-k", "not (test_subprocess_error or test_subprocess_print)"]
 
 # https://github.com/ipython/ipykernel/pull/496
-if py_impl == "PyPy":
-    pytest_args += ["-k", "not (test_io_api)"]
+if "pypy" in py_impl:
+    pytest_args += ["-k", "not test_io_api"]
 
+print("Final pytest args:", pytest_args)
 
 # actually run the tests
 sys.exit(pytest.main(pytest_args))
