@@ -48,9 +48,10 @@ if sys.platform.startswith("win") and sys.version_info >= (3, 8):
             # fallback to the pre-3.8 default of Selector
             asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
 
-# still needed as of 5.4.1
 if sys.platform == "darwin":
+    # still needed as of 5.2.1
     pytest_args += ["-k", "not (test_subprocess_error or test_subprocess_print)"]
+    pytest_args += ["-k", "not unc_paths"]
 
 # https://github.com/ipython/ipykernel/pull/496
 if "pypy" in py_impl:
