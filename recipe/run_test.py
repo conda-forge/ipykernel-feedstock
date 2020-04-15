@@ -3,10 +3,12 @@ import os
 import platform
 import sys
 import pytest
-
+import site
 
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
+site_packages = site.getsitepackages()[0]
+
 print("Python implementation:", py_impl)
 specfile = os.path.join(os.environ['PREFIX'], 'share', 'jupyter', 'kernels',
                         'python{}'.format(py_major), 'kernel.json')
@@ -29,7 +31,7 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
            ''.format(spec['argv'][0], sys.executable))
     sys.exit(1)
 
-pytest_args = ["-m", "not flaky", "--pyargs", "ipykernel"]
+pytest_args = [os.path.join(site_packages, 'ipykernel'), "-m", "not flaky"]
 
 # reproduced here so we don't import it
 if sys.platform.startswith("win"):
