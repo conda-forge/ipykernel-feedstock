@@ -33,9 +33,11 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
 loader = pkgutil.get_loader("ipykernel.tests")
 pytest_args = [os.path.dirname(loader.path), "-vv", "-m", "not flaky"]
 
+skips = []
+
 # reproduced here so we don't import it
 if sys.platform.startswith("win"):
-    pytest_args += ["-k", "not test_sys_path_profile_dir"]
+    skips += ["test_sys_path_profile_dir"]
 
     if sys.version_info >= (3, 8):
         import asyncio
@@ -55,12 +57,18 @@ if sys.platform.startswith("win"):
 
 if sys.platform == "darwin":
     # still needed as of 5.2.1
-    pytest_args += ["-k", "not (test_subprocess_error or test_subprocess_print)"]
-    pytest_args += ["-k", "not test_unc_paths"]
+    skips += [
+        "test_subprocess_error,
+        "test_subprocess_print",
+        "test_unc_paths"
+    ]
 
 # https://github.com/ipython/ipykernel/pull/496
 if "pypy" in py_impl:
-    pytest_args += ["-k", "not test_io_api"]
+    skips += ["test_io_api"]
+
+if skips:
+    pytest_args += ["-k", "not({})".format(" or ".join(skips))]
 
 print("Final pytest args:", pytest_args)
 
