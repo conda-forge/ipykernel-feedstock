@@ -67,8 +67,12 @@ if sys.platform == "darwin":
 if "pypy" in py_impl:
     skips += ["test_io_api"]
 
-if skips:
-    pytest_args += ["-k", "not({})".format(" or ".join(skips))]
+if not skips:
+    print("all non-flaky tests will be run")
+elif len(skips) == 1:
+    pytest_args += ["-k", *skips]
+else:
+    pytest_args += ["-k", "not ({})".format(" or ".join(skips))]
 
 print("Final pytest args:", pytest_args)
 
