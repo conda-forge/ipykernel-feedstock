@@ -70,7 +70,7 @@ if "pypy" in py_impl:
 if not skips:
     print("all non-flaky tests will be run")
 elif len(skips) == 1:
-    pytest_args += ["-k", *skips]
+    pytest_args += ["-k", "not {}".format(*skips)]
 else:
     pytest_args += ["-k", "not ({})".format(" or ".join(skips))]
 
