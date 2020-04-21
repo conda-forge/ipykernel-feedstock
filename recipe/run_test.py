@@ -58,7 +58,7 @@ if sys.platform.startswith("win"):
 if sys.platform == "darwin":
     # still needed as of 5.2.1
     skips += [
-        "test_subprocess_error,
+        "test_subprocess_error",
         "test_subprocess_print",
         "test_unc_paths"
     ]
