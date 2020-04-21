@@ -2,12 +2,11 @@ import json
 import os
 import platform
 import sys
+import pkgutil
 import pytest
-import site
 
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
-site_packages = site.getsitepackages()[0]
 
 print("Python implementation:", py_impl)
 specfile = os.path.join(os.environ['PREFIX'], 'share', 'jupyter', 'kernels',
@@ -31,7 +30,8 @@ if spec['argv'][0].replace('\\', '/') != sys.executable.replace('\\', '/'):
            ''.format(spec['argv'][0], sys.executable))
     sys.exit(1)
 
-pytest_args = [os.path.join(site_packages, 'ipykernel'), "-m", "not flaky"]
+loader = pkgutil.get_loader("ipykernel.tests")
+pytest_args = [os.path.dirname(loader.path), "-vv", "-m", "not flaky"]
 
 # reproduced here so we don't import it
 if sys.platform.startswith("win"):
