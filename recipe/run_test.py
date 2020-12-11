@@ -35,38 +35,6 @@ pytest_args = [os.path.dirname(loader.path), "-vv", "-m", "not flaky"]
 
 skips = []
 
-# reproduced here so we don't import it
-if sys.platform.startswith("win"):
-    skips += ["test_sys_path_profile_dir"]
-
-    if sys.version_info >= (3, 8):
-        import asyncio
-        try:
-            from asyncio import (
-                WindowsProactorEventLoopPolicy,
-                WindowsSelectorEventLoopPolicy,
-            )
-        except ImportError:
-            pass
-            # not affected
-        else:
-            if type(asyncio.get_event_loop_policy()) is WindowsProactorEventLoopPolicy:
-                # WindowsProactorEventLoopPolicy is not compatible with tornado 6
-                # fallback to the pre-3.8 default of Selector
-                asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
-
-if sys.platform == "darwin":
-    # still needed as of 5.2.1
-    skips += [
-        "test_subprocess_error",
-        "test_subprocess_print",
-        "test_unc_paths"
-    ]
-
-# https://github.com/ipython/ipykernel/pull/496
-if "pypy" in py_impl:
-    skips += ["test_io_api"]
-
 if not skips:
     print("all non-flaky tests will be run")
 elif len(skips) == 1:
