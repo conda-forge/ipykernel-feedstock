@@ -38,6 +38,9 @@ requirements:
     - python
     - tornado >=4.2
     - traitlets >=4.1
+    # pyzmq is a run-dep of jupyter_client;
+    # temporary pin since v21 breaks pypy
+    - pyzmq <21
 
 test:
   requires:
