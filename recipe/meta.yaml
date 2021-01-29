@@ -9,7 +9,7 @@ source:
   sha256: 697103d218e9a8828025af7986e033c89e0b36e2b6eb84a5bda4739b9a27f3cb
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<34]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
@@ -38,9 +38,7 @@ requirements:
     - python
     - tornado >=4.2
     - traitlets >=4.1
-    # pyzmq is a run-dep of jupyter_client;
-    # temporary pin since v21 breaks pypy
-    - pyzmq <21
+    - pyzmq >=22.0.1
 
 test:
   requires:
