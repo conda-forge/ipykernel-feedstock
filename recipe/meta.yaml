@@ -38,7 +38,6 @@ requirements:
     - python
     - tornado >=4.2
     - traitlets >=4.1
-    - pyzmq >=22.0.1
 
 test:
   requires:
