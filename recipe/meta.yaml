@@ -1,4 +1,4 @@
-{% set version = "5.5.0" %}
+{% set version = "5.5.3" %}
 
 package:
   name: ipykernel
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 98321abefdf0505fb3dc7601f60fc4087364d394bd8fad53107eb1adee9ff475
+  sha256: a682e4f7affd86d9ce9b699d21bcab6d5ec9fbb2bfcb194f2706973b252bc509
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<34]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
