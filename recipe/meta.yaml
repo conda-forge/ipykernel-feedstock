@@ -10,7 +10,8 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<37]
+  # TODO: restore pypy builds
+  skip: true  # [py<37 or python_impl == "pypy"]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
