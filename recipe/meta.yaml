@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  # TODO: restore pypy builds
+  # TODO: restore pypy builds https://github.com/conda-forge/ipykernel-feedstock/issues/85
   skip: true  # [py<37 or python_impl == "pypy"]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
