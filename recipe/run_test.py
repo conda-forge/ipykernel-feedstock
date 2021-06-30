@@ -52,6 +52,9 @@ pytest_args += [
 
 skips = ["flaky"]
 
+if py_impl == "pypy":
+    skips += ["shutdown"]
+
 if len(skips) == 1:
     pytest_args += ["-k", "not {}".format(*skips)]
 else:
