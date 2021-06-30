@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<34]
+  skip: true  # [py<36]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
@@ -28,31 +28,40 @@ requirements:
     - jupyter_client                         # [build_platform != target_platform]
   {% endif %}
   host:
-    - ipython >=5.0
+    - debugpy >=1
+    - ipython >=7.23.1
     - jupyter_client
     - pip
     - python
   run:
-    - ipython >=5.0
+    - appnope  # [osx]
+    - debugpy >=1
+    - importlib-metadata <4  # [py<38]
+    - ipython >=7.23.1
     - jupyter_client
+    - matplotlib-inline >=0.1.0,<0.2.0
     - python
     - tornado >=4.2
-    - traitlets >=4.1
-    # pyzmq is a run-dep of jupyter_client;
-    # temporary pin since v21 breaks pypy
-    - pyzmq !=21
+    - traitlets >=4.1.0
 
 test:
   requires:
-    - curio
+    - curio  # [not win]
     - flaky
-    - ipython
+    - ipyparallel
+    - matplotlib-base
     - nose
     - numpy
+    - pip
     - pytest !=5.3.4
+    - pytest-cov
+    - pytest-timeout
+    - trio
+
   imports:
     - ipykernel
   commands:
+    - pip check
     - jupyter kernelspec list
 
 about:
