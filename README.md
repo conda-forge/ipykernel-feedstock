@@ -271,6 +271,7 @@ Feedstock Maintainers
 * [@Carreau](https://github.com/Carreau/)
 * [@blink1073](https://github.com/blink1073/)
 * [@bollwyvl](https://github.com/bollwyvl/)
+* [@davidbrochart](https://github.com/davidbrochart/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@minrk](https://github.com/minrk/)
 * [@ocefpaf](https://github.com/ocefpaf/)
