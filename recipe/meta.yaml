@@ -35,7 +35,7 @@ requirements:
     - pip
     - python
   run:
-    - argcomplete>=1.12.3  # [py<38]
+    - argcomplete >=1.12.3  # [py<38]
     - appnope  # [osx]
     - debugpy >=1,<2.0
     - importlib-metadata <5  # [py<38]
