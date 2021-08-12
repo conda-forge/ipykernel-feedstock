@@ -35,9 +35,10 @@ requirements:
     - pip
     - python
   run:
+    - argcomplete>=1.12.3  # [py<38]
     - appnope  # [osx]
     - debugpy >=1,<2.0
-    - importlib-metadata <4  # [py<38]
+    - importlib-metadata <5  # [py<38]
     - ipython >=7.23.1,<8.0
     - jupyter_client <7.0
     - matplotlib-inline >=0.1.0,<0.2.0
