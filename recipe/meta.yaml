@@ -31,6 +31,7 @@ requirements:
   host:
     - debugpy >=1,<2.0
     - ipython >=7.23.1,<8.0
+    - ipython_genutils
     - jupyter_client <7.0
     - pip
     - python
