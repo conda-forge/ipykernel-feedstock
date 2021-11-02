@@ -31,7 +31,6 @@ requirements:
   host:
     - debugpy >=1,<2.0
     - ipython >=7.23.1,<8.0
-    - ipython_genutils
     - jupyter_client <7.0
     - pip
     - python
@@ -40,13 +39,12 @@ requirements:
     - appnope  # [osx]
     - debugpy >=1,<2.0
     - importlib-metadata <5  # [py<38]
-    - ipython_genutils
     - ipython >=7.23.1,<8.0
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
     - python
     - tornado >=4.2,<7.0
-    - traitlets >=4.1.0,<6.0
+    - traitlets >=5.1.0,<6.0
 
 test:
   requires:
