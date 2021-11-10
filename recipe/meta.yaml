@@ -1,4 +1,4 @@
-{% set version = "6.4.2" %}
+{% set version = "6.5.0" %}
 
 package:
   name: ipykernel
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 0140f78bfd60e47e387b6433b4bed0f228986420dc4d5fac0e251c9711e23e29
+  sha256: 299795cca2c4aed7e233e3ad5360e1c73627fd0dcec11a9e75d5b2df43629353
 
 build:
   number: 0
@@ -31,7 +31,6 @@ requirements:
   host:
     - debugpy >=1,<2.0
     - ipython >=7.23.1,<8.0
-    - ipython_genutils
     - jupyter_client <7.0
     - pip
     - python
@@ -40,13 +39,12 @@ requirements:
     - appnope  # [osx]
     - debugpy >=1,<2.0
     - importlib-metadata <5  # [py<38]
-    - ipython_genutils
     - ipython >=7.23.1,<8.0
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
     - python
     - tornado >=4.2,<7.0
-    - traitlets >=4.1.0,<6.0
+    - traitlets >=5.1.0,<6.0
 
 test:
   requires:
