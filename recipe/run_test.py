@@ -7,8 +7,12 @@ import pytest
 
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
+machine = platform.machine().lower()
+
 
 print("Python implementation:", py_impl)
+print("              Machine:", machine)
+
 specfile = os.path.join(
     os.environ["PREFIX"],
     "share",
@@ -37,6 +41,10 @@ if spec["argv"][0].replace("\\", "/") != sys.executable.replace("\\", "/"):
         "".format(spec["argv"][0], sys.executable)
     )
     sys.exit(1)
+
+if py_impl == "pypy" and ("ppc" in machine or "aarch64" in machine):
+    print(f"Skipping pytest on {machine} for {py_impl}")
+    sys.exit(0)
 
 loader = pkgutil.get_loader("ipykernel.tests")
 pytest_args = [os.path.dirname(loader.path), "-vv", "--timeout", "300"]
