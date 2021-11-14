@@ -38,7 +38,7 @@ if spec["argv"][0].replace("\\", "/") != sys.executable.replace("\\", "/"):
     )
     sys.exit(1)
 
-if os.environ["MIGRATING"]:
+if json.loads(os.environ.get("MIGRATING", "0").lower()):
     print("Skipping pytest due to on-going migration...")
     sys.exit(0)
 

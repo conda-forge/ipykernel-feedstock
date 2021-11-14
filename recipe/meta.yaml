@@ -1,7 +1,7 @@
 {% set version = "6.5.0" %}
 
-{% set migrating = "false" %}
-{% set migrating = "true" %}  # [py == 310]
+{% set migrating = false %}
+{% set migrating = true %}  # [py>39]
 
 package:
   name: ipykernel
@@ -13,8 +13,7 @@ source:
 
 build:
   number: 0
-  # TODO: restore pypy builds https://github.com/conda-forge/ipykernel-feedstock/issues/85
-  skip: true  # [py<37 or python_impl == "pypy"]
+  skip: true  # [py<37]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
