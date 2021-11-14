@@ -38,10 +38,6 @@ if spec["argv"][0].replace("\\", "/") != sys.executable.replace("\\", "/"):
     )
     sys.exit(1)
 
-if json.loads(os.environ.get("MIGRATING", "0").lower()):
-    print("Skipping pytest due to on-going migration...")
-    sys.exit(0)
-
 loader = pkgutil.get_loader("ipykernel.tests")
 pytest_args = [os.path.dirname(loader.path), "-vv", "--timeout", "300"]
 
@@ -65,4 +61,10 @@ else:
 print("Final pytest args:", pytest_args)
 
 # actually run the tests
-sys.exit(pytest.main(pytest_args))
+rc = pytest.main(pytest_args)
+
+if json.loads(os.environ.get("MIGRATING", "0").lower()):
+    print("Ignoring pytest failure due to on-going migration...")
+    sys.exit(0)
+
+sys.exit(rc)

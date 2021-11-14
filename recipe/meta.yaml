@@ -54,7 +54,7 @@ test:
   requires:
     - curio  # [not win]
     - flaky
-    - nose # [py < 310]
+    - nose # [py<310]
     - numpy
     - pip
     - pytest !=5.3.4
