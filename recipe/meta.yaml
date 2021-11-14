@@ -1,5 +1,8 @@
 {% set version = "6.5.0" %}
 
+{% set migrating = "false" %}
+{% set migrating = "true" %}  # [py == 310]
+
 package:
   name: ipykernel
   version: {{ version }}
@@ -19,6 +22,8 @@ build:
     - {{ PYTHON }} -m ipykernel install --sys-prefix
     # TODO: this may be needed/desirable at some point
     # - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
+  script_env:
+    - MIGRATING={{ migrating }}
 
 requirements:
   {% if not win %}
@@ -50,15 +55,17 @@ test:
   requires:
     - curio  # [not win]
     - flaky
-    - ipyparallel
-    - matplotlib-base
-    - nose
+    - nose # [py < 310]
     - numpy
     - pip
     - pytest !=5.3.4
     - pytest-cov
     - pytest-timeout
     - trio
+    {% if not migrating %}
+    - ipyparallel
+    - matplotlib-base
+    {% endif %}
 
   imports:
     - ipykernel

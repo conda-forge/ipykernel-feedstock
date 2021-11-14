@@ -38,6 +38,10 @@ if spec["argv"][0].replace("\\", "/") != sys.executable.replace("\\", "/"):
     )
     sys.exit(1)
 
+if os.environ["MIGRATING"]:
+    print("Skipping pytest due to on-going migration...")
+    sys.exit(0)
+
 loader = pkgutil.get_loader("ipykernel.tests")
 pytest_args = [os.path.dirname(loader.path), "-vv", "--timeout", "300"]
 
