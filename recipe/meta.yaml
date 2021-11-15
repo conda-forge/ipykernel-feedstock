@@ -9,7 +9,7 @@ source:
   sha256: e976751336b51082a89fc2099fb7f96ef20f535837c398df6eab1283c2070884
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<34]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
