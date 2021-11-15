@@ -1,5 +1,8 @@
 {% set version = "6.5.0" %}
 
+{% set migrating = false %}
+{% set migrating = true %}  # [py>39]
+
 package:
   name: ipykernel
   version: {{ version }}
@@ -9,9 +12,8 @@ source:
   sha256: 299795cca2c4aed7e233e3ad5360e1c73627fd0dcec11a9e75d5b2df43629353
 
 build:
-  number: 0
-  # TODO: restore pypy builds https://github.com/conda-forge/ipykernel-feedstock/issues/85
-  skip: true  # [py<37 or python_impl == "pypy"]
+  number: 1
+  skip: true  # [py<37]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
@@ -19,6 +21,8 @@ build:
     - {{ PYTHON }} -m ipykernel install --sys-prefix
     # TODO: this may be needed/desirable at some point
     # - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
+  script_env:
+    - MIGRATING={{ migrating }}
 
 requirements:
   {% if not win %}
@@ -50,15 +54,17 @@ test:
   requires:
     - curio  # [not win]
     - flaky
-    - ipyparallel
-    - matplotlib-base
-    - nose
+    - nose  # [py<310]
     - numpy
     - pip
     - pytest !=5.3.4
     - pytest-cov
     - pytest-timeout
     - trio
+    {% if not migrating %}
+    - ipyparallel
+    - matplotlib-base
+    {% endif %}
 
   imports:
     - ipykernel
