@@ -1,4 +1,4 @@
-{% set version = "6.5.1" %}
+{% set version = "6.6.0" %}
 
 {% set migrating = false %}
 {% set migrating = true %}  # [py>39]
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: dd27172bccbbcfef952991e49372e4c6fd1c14eed0df05ebd5b4335cb27a81a2
+  sha256: 3a227788216b43982d9ac28195949467627b0d16e6b8af9741d95dcaa8c41a89
 
 build:
   number: 0
@@ -54,7 +54,6 @@ test:
   requires:
     - curio  # [not win]
     - flaky
-    - nose  # [py<310]
     - numpy
     - pip
     - pytest !=5.3.4
