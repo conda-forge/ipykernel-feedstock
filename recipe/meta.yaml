@@ -1,7 +1,6 @@
-{% set version = "6.6.0" %}
+{% set version = "6.6.1" %}
 
-{% set migrating = false %}
-{% set migrating = true %}  # [py>39]
+{% set migrating = False %}
 
 package:
   name: ipykernel
@@ -9,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 3a227788216b43982d9ac28195949467627b0d16e6b8af9741d95dcaa8c41a89
+  sha256: 91ff0058b45660aad4a68088041059c0d378cd53fc8aff60e5abc91bcc049353
 
 build:
   number: 0
@@ -30,22 +29,25 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - ipython >=5.0                          # [build_platform != target_platform]
-    - jupyter_client <7.0                    # [build_platform != target_platform]
+    - jupyter_client <8.0                    # [build_platform != target_platform]
+    - jupyter_core >=4.2                      # [build_platform != target_platform]
   {% endif %}
   host:
-    - debugpy >=1,<2.0
+    - debugpy >=1.0.0,<2.0
     - ipython >=7.23.1
-    - jupyter_client <7.0
+    - jupyter_client <8.0
+    - jupyter_core >=4.2
     - pip
     - python
   run:
     - argcomplete >=1.12.3  # [py<38]
     - appnope  # [osx]
-    - debugpy >=1,<2.0
+    - debugpy >=1.0.0,<2.0
     - importlib-metadata <5  # [py<38]
     - ipython >=7.23.1
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
+    - nest-asyncio
     - python
     - tornado >=4.2,<7.0
     - traitlets >=5.1.0,<6.0
