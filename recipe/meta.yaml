@@ -28,23 +28,27 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - debugpy >=1.0.0,<2.0                   # [build_platform != target_platform]
     - ipython >=5.0                          # [build_platform != target_platform]
     - jupyter_client <7.0                    # [build_platform != target_platform]
+    - jupyter_core <4.2                      # [build_platform != target_platform]
   {% endif %}
   host:
-    - debugpy >=1,<2.0
+    - debugpy >=1.0.0,<2.0
     - ipython >=7.23.1
     - jupyter_client <7.0
+    - jupyter_core >=4.2
     - pip
     - python
   run:
     - argcomplete >=1.12.3  # [py<38]
     - appnope  # [osx]
-    - debugpy >=1,<2.0
+    - debugpy >=1.0.0,<2.0
     - importlib-metadata <5  # [py<38]
     - ipython >=7.23.1
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
+    - nest-asyncios
     - python
     - tornado >=4.2,<7.0
     - traitlets >=5.1.0,<6.0
