@@ -28,7 +28,6 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - debugpy >=1.0.0,<2.0                   # [build_platform != target_platform]
     - ipython >=5.0                          # [build_platform != target_platform]
     - jupyter_client <7.0                    # [build_platform != target_platform]
     - jupyter_core <4.2                      # [build_platform != target_platform]
