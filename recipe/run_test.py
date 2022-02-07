@@ -49,14 +49,15 @@ if py_impl == "pypy" and ("ppc" in machine or "aarch64" in machine):
 loader = pkgutil.get_loader("ipykernel.tests")
 pytest_args = [os.path.dirname(loader.path), "-vv", "--timeout", "300"]
 
-# coverage options
-pytest_args += [
-    "--cov",
-    "ipykernel",
-    "--cov-report",
-    "term-missing:skip-covered",
-    "--no-cov-on-fail",
-]
+if py_impl != "pypy":
+    # coverage is very slow on pypy
+    pytest_args += [
+        "--cov",
+        "ipykernel",
+        "--cov-report",
+        "term-missing:skip-covered",
+        "--no-cov-on-fail",
+    ]
 
 # TODO: investigate upstream interrupt regression in 6.5.0
 skips = ["flaky", "interrupt"]
