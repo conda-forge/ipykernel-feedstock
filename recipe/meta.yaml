@@ -46,6 +46,7 @@ requirements:
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
     - nest-asyncio
+    - psutil
     - python
     - tornado >=4.2,<7.0
     - traitlets >=5.1.0,<6.0
