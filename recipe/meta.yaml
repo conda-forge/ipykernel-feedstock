@@ -1,4 +1,4 @@
-{% set version = "6.9.1" %}
+{% set version = "6.9.2" %}
 
 {% set migrating = false %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: f95070a2dfd3147f8ab19f18ee46733310813758593745e07ec18fb08b409f1d
+  sha256: 4c3cc8cb359f2ead70c30f5504971c0d285e2c1c699d2ce9af0216fe9c9fb17c
 
 build:
   number: 0
@@ -30,7 +30,8 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - ipython >=5.0                          # [build_platform != target_platform]
     - jupyter_client <8.0                    # [build_platform != target_platform]
-    - jupyter_core >=4.2                      # [build_platform != target_platform]
+    - jupyter_core >=4.2                     # [build_platform != target_platform]
+    - psutil                                 # [build_platform != target_platform]
   {% endif %}
   host:
     - debugpy >=1.0.0,<2.0
@@ -38,6 +39,7 @@ requirements:
     - jupyter_client <8.0
     - jupyter_core >=4.2
     - pip
+    - psutil
     - python
   run:
     - appnope  # [osx]
@@ -46,6 +48,7 @@ requirements:
     - jupyter_client <8.0
     - matplotlib-inline >=0.1.0,<0.2.0
     - nest-asyncio
+    - psutil
     - python
     - tornado >=4.2,<7.0
     - traitlets >=5.1.0,<6.0
