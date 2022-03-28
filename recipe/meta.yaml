@@ -1,4 +1,4 @@
-{% set version = "6.9.2" %}
+{% set version = "6.10.0" %}
 
 {% set migrating = false %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 4c3cc8cb359f2ead70c30f5504971c0d285e2c1c699d2ce9af0216fe9c9fb17c
+  sha256: d1c7d92daea5d9b55a33e523d4d17c09ad38e0df17a4e0ed2fa5c97f07f200ba
 
 build:
   number: 0
@@ -50,7 +50,7 @@ requirements:
     - nest-asyncio
     - psutil
     - python
-    - tornado >=4.2,<7.0
+    - tornado >=5.0,<7.0
     - traitlets >=5.1.0,<6.0
 
 test:
