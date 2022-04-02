@@ -11,7 +11,7 @@ source:
   sha256: 6712604531c96100f326440c11cb023da26819f2f34ba9d1ca0fb163401834e8
 
 build:
-  number: 1
+  number: 2
   skip: true  # [py<37]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
@@ -48,7 +48,7 @@ requirements:
     - nest-asyncio
     - psutil
     - python
-    - setuptools >=60
+    - setuptools
     - tornado >=6.1
     - traitlets >=5.1.0
 
