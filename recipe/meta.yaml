@@ -1,4 +1,4 @@
-{% set version = "6.12.0" %}
+{% set version = "6.12.1" %}
 
 {% set migrating = false %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 84fae3617b70b1219d99a53888d6c404e0e0bc251d13d35dbb84fbf83cf5f894
+  sha256: 0868f5561729ade444011f8ca7d3502dc9f27f7f44e20f1d5fee7e1f2b7183a1
 
 build:
   number: 0
@@ -60,11 +60,9 @@ test:
     - flaky
     - numpy
     - pip
-    - pygobject  # [python_impl == 'cpython']
     - pytest >=6.0
     - pytest-cov
     - pytest-timeout
-    - trio
     {% if not migrating %}
     - ipyparallel
     - matplotlib-base
