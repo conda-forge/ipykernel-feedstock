@@ -60,7 +60,7 @@ test:
     - flaky
     - numpy
     - pip
-    - pygobject
+    - pygobject  # [python_impl == 'cpython']
     - pytest >=6.0
     - pytest-cov
     - pytest-timeout
