@@ -1,4 +1,4 @@
-{% set version = "6.11.0" %}
+{% set version = "6.12.0" %}
 
 {% set migrating = false %}
 
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 6712604531c96100f326440c11cb023da26819f2f34ba9d1ca0fb163401834e8
+  sha256: 84fae3617b70b1219d99a53888d6c404e0e0bc251d13d35dbb84fbf83cf5f894
 
 build:
-  number: 2
+  number: 0
   skip: true  # [py<37]
   script:
     - {{ PYTHON }} setup.py bdist_wheel
