@@ -36,7 +36,7 @@ requirements:
     - packaging
     - pip
     - psutil
-    - python
+    - python 3.9
   run:
     - appnope  # [unix]
     - debugpy >=1.0
@@ -46,12 +46,13 @@ requirements:
     - nest-asyncio
     - packaging
     - psutil
-    - python
+    - python >=3.7
     - tornado >=6.1
     - traitlets >=5.1.0
 
 test:
   requires:
+    - python 3.8
     - curio  # [not win]
     - flaky
     - numpy
