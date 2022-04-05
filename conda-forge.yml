@@ -9,3 +9,5 @@ github:
 noarch_platforms:
   - linux_64
   - win_64
+azure:
+  store_build_artifacts: true
