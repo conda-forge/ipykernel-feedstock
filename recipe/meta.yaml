@@ -28,11 +28,6 @@ build:
 
 requirements:
   host:
-    {% if noarch_platform == "unix" %}
-    - __unix
-    {% else %}
-    - __win
-    {% endif %}
     - debugpy >=1.0.0
     - ipython >=7.23.1
     - jupyter_client >=6.1.12
@@ -42,7 +37,10 @@ requirements:
     - python 3.9
   run:
     {% if noarch_platform == "unix" %}
+    - __unix
     - appnope
+    {% else %}
+    - __win
     {% endif %}
     - debugpy >=1.0
     - ipython >=7.23.1
