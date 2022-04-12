@@ -32,6 +32,8 @@ requirements:
     - packaging
     - pip
     - psutil
+    # note: make sure host python and test python don't match
+    # to provoke possible cross-version noarch issues
     - python 3.9
   run:
     - __{{ noarch_platform }}
@@ -51,6 +53,8 @@ requirements:
 
 test:
   requires:
+    # note: make sure host python and test python don't match
+    # to provoke possible cross-version noarch issues
     - python 3.8
     - curio  # [not win]
     - flaky
