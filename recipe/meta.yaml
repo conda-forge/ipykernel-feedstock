@@ -14,9 +14,6 @@ source:
 build:
   number: {{ build }}
   noarch: python
-  # avoid collision on build string
-  # with multiple noarch builds
-  string: "py_{{ noarch_platform }}_{{ build }}"
   script:
     - {{ PYTHON }} setup.py bdist_wheel
     - cd dist
@@ -37,11 +34,9 @@ requirements:
     - psutil
     - python 3.9
   run:
-    {% if noarch_platform == "unix" %}
-    - __unix
+    - __{{ noarch_platform }}
+    {% if noarch_platform == "osx" %}
     - appnope
-    {% else %}
-    - __win
     {% endif %}
     - debugpy >=1.0
     - ipython >=7.23.1
