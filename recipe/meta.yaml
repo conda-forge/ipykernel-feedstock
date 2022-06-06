@@ -57,6 +57,7 @@ requirements:
 test:
   requires:
     - curio  # [not win]
+
     - flaky
     - numpy
     - pip
@@ -67,6 +68,8 @@ test:
     - ipyparallel
     - matplotlib-base
     {% endif %}
+    # TODO: remove eventually
+    - jupyter_client !=7.3.2=*_0
 
   imports:
     - ipykernel
