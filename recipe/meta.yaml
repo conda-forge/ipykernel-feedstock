@@ -1,4 +1,4 @@
-{% set version = "6.13.0" %}
+{% set version = "6.13.1" %}
 
 {% set migrating = false %}
 
@@ -8,15 +8,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 0e28273e290858393e86e152b104e5506a79c13d25b951ac6eca220051b4be60
+  sha256: 6f42070a5d87ecbf4a2fc27a7faae8d690fd3794825a090ddf6b00b9678a5b69
 
 build:
   number: 0
   skip: true  # [py<37]
   script:
-    - {{ PYTHON }} setup.py bdist_wheel
-    - cd dist
-    - {{ PYTHON }} -m pip install ipykernel-{{ version }}-py3-none-any.whl --no-deps -vv
+    - {{ PYTHON }} -m pip install . --no-deps -vv
     - {{ PYTHON }} -m ipykernel install --sys-prefix
     # TODO: this may be needed/desirable at some point
     # - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
@@ -27,6 +25,7 @@ requirements:
   {% if not win %}
   build:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - hatchling >=0.25                       # [build_platform != target_platform]
     - ipython >=7.23.1                       # [build_platform != target_platform]
     - jupyter_client >=6.1.12                # [build_platform != target_platform]
     - packaging                              # [build_platform != target_platform]
@@ -35,6 +34,7 @@ requirements:
   {% endif %}
   host:
     - debugpy >=1.0.0
+    - hatchling >=0.25
     - ipython >=7.23.1
     - jupyter_client >=6.1.12
     - packaging
@@ -57,6 +57,7 @@ requirements:
 test:
   requires:
     - curio  # [not win]
+
     - flaky
     - numpy
     - pip
@@ -67,6 +68,8 @@ test:
     - ipyparallel
     - matplotlib-base
     {% endif %}
+    # TODO: remove eventually
+    - jupyter_client !=7.3.2=*_0
 
   imports:
     - ipykernel
