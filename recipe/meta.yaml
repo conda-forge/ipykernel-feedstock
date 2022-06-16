@@ -46,6 +46,7 @@ requirements:
     - packaging
     - psutil
     - python >=3.7
+    - pyzmq >=17
     - tornado >=6.1
     - traitlets >=5.1.0
 
