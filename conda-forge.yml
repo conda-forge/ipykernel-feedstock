@@ -1,6 +1,4 @@
-build_platform: {osx_arm64: osx_64}
 conda_forge_output_validation: true
-provider: {linux_aarch64: azure, linux_ppc64le: azure, win: azure}
 test_on_native_only: true
 bot:
   abi_migration_branches:
@@ -8,3 +6,9 @@ bot:
 github:
   branch_name: main
   tooling_branch_name: main
+noarch_platforms:
+  - linux_64
+  - osx_64
+  - win_64
+azure:
+  store_build_artifacts: true

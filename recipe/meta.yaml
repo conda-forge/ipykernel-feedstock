@@ -1,4 +1,4 @@
-{% set version = "6.14.0" %}
+{% set version = "6.15.0" %}
 
 {% set migrating = false %}
 
@@ -8,11 +8,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 720f2a07aadf70ca05b034f2cdd0590a8bd56581ddf3b7ec4a37075366270e89
+  sha256: b59f9d9672c3a483494bb75915a2b315e78b833a38b039b1ee36dc28683f0d89
 
 build:
   number: 0
-  skip: true  # [py<37]
+  noarch: python
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
     - {{ PYTHON }} -m ipykernel install --sys-prefix
@@ -22,16 +22,6 @@ build:
     - MIGRATING={{ migrating }}
 
 requirements:
-  {% if not win %}
-  build:
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - hatchling >=0.25                       # [build_platform != target_platform]
-    - ipython >=7.23.1                       # [build_platform != target_platform]
-    - jupyter_client >=6.1.12                # [build_platform != target_platform]
-    - packaging                              # [build_platform != target_platform]
-    - psutil                                 # [build_platform != target_platform]
-    - python                                 # [build_platform != target_platform]
-  {% endif %}
   host:
     - debugpy >=1.0.0
     - hatchling >=0.25
@@ -40,9 +30,14 @@ requirements:
     - packaging
     - pip
     - psutil
-    - python
+    # note: make sure host python and test python don't match
+    # to provoke possible cross-version noarch issues
+    - python 3.9
   run:
-    - appnope  # [osx]
+    - __{{ noarch_platform }}
+    {% if noarch_platform == "osx" %}
+    - appnope
+    {% endif %}
     - debugpy >=1.0
     - ipython >=7.23.1
     - jupyter_client >=6.1.12
@@ -50,12 +45,16 @@ requirements:
     - nest-asyncio
     - packaging
     - psutil
-    - python
+    - python >=3.7
+    - pyzmq >=17
     - tornado >=6.1
     - traitlets >=5.1.0
 
 test:
   requires:
+    # note: make sure host python and test python don't match
+    # to provoke possible cross-version noarch issues
+    - python 3.8
     - curio  # [not win]
 
     - flaky
