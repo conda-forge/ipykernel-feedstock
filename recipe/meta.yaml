@@ -1,4 +1,4 @@
-{% set version = "6.17.0" %}
+{% set version = "6.17.1" %}
 
 {% set migrating = false %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: e195cf6d8c3dd5d41f3cf8ad831d9891f95d7d18fa6d5fb4d30a713df99b26a4
+  sha256: e178c1788399f93a459c241fe07c3b810771c607b1fb064a99d2c5d40c90c5d4
 
 build:
   number: 0
