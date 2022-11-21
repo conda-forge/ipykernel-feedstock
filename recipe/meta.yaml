@@ -1,4 +1,4 @@
-{% set version = "6.17.1" %}
+{% set version = "6.18.0" %}
 
 {% set migrating = false %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: e178c1788399f93a459c241fe07c3b810771c607b1fb064a99d2c5d40c90c5d4
+  sha256: 89bed6d97ddaf5f3c47f2fce7981f6dc5a6bc847ff165e19e350a7cd16f3249f
 
 build:
   number: 0
@@ -24,7 +24,8 @@ build:
 requirements:
   host:
     - debugpy >=1.0.0
-    - hatchling >=0.25
+    - comm >=0.1
+    - hatchling >=1.4
     - ipython >=7.23.1
     - jupyter_client >=6.1.12
     - packaging
@@ -38,6 +39,7 @@ requirements:
     {% if noarch_platform == "osx" %}
     - appnope
     {% endif %}
+    - comm >=0.1
     - debugpy >=1.0
     - ipython >=7.23.1
     - jupyter_client >=6.1.12
@@ -61,6 +63,7 @@ test:
     - numpy
     - pip
     - pytest >=6.0
+    - pytest-asyncio
     - pytest-cov
     - pytest-timeout
     {% if not migrating %}
