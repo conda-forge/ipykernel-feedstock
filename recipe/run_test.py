@@ -47,15 +47,18 @@ if py_impl == "pypy" and ("ppc" in machine or "aarch64" in machine):
     sys.exit(0)
 
 loader = pkgutil.get_loader("ipykernel.tests")
-pytest_args = [os.path.dirname(loader.path), "-vv", "--timeout", "300"]
+pytest_args = [
+    os.path.dirname(loader.path), 
+    "-vv", 
+    "--timeout=300",
+    "--asyncio-mode=auto",
+]
 
 if py_impl != "pypy":
     # coverage is very slow on pypy
     pytest_args += [
-        "--cov",
-        "ipykernel",
-        "--cov-report",
-        "term-missing:skip-covered",
+        "--cov=ipykernel",
+        "--cov-report=term-missing:skip-covered",
         "--no-cov-on-fail",
     ]
 
