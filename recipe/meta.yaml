@@ -51,6 +51,7 @@ requirements:
     - pyzmq >=17
     - tornado >=6.1
     - traitlets >=5.1.0
+    - nest-asyncio
 
 test:
   requires:
