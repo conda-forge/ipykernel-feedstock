@@ -12,3 +12,5 @@ noarch_platforms:
 - win_64
 conda_build:
   pkg_format: '2'
+bot:
+  inspection: hint-all
