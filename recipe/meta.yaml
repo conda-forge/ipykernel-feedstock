@@ -45,13 +45,13 @@ requirements:
     - jupyter_client >=6.1.12
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
+    - nest-asyncio
     - packaging
     - psutil
     - python >=3.8
     - pyzmq >=20
     - tornado >=6.1
     - traitlets >=5.4.0
-    - nest-asyncio
 
 test:
   requires:
