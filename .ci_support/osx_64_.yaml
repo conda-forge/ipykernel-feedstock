@@ -9,4 +9,4 @@ macos_machine:
 noarch_platform:
 - osx
 numpy:
-- '1.21'
+- '1.22'
