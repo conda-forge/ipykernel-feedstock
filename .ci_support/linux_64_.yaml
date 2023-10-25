@@ -9,4 +9,4 @@ docker_image:
 noarch_platform:
 - linux
 numpy:
-- '1.22'
+- '1.23'
