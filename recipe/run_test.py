@@ -26,6 +26,7 @@ prefix = Path(os.environ["PREFIX"])
 rm_win_paths = [
     "test_embed_kernel.py",
     "test_ipkernel_direct.py",
+    "test_kernel_direct.py",
 ]
 
 def check_kernel() -> int:
