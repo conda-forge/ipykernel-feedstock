@@ -13,12 +13,15 @@ py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
 
+
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
 is_pypy = py_impl == "pypy"
+is_win = platform.system() == "Windows"
 
 prefix = Path(os.environ["PREFIX"])
 
+rm_win_paths = ["test_embed_kernel.py"]
 
 def check_kernel() -> int:
     print(f"Python implementation: {py_impl}")
@@ -79,6 +82,12 @@ def run_pytest():
     if is_pypy and (is_aarch or is_ppc):
         print(f"Skipping pytest on {machine} for {py_impl}")
         return 0
+
+    if is_win:
+        # remove paths that don't import on windows
+        for path in rm_win_paths:
+            if os.path.exists(f"tests/{path}"):
+                os.unlink(f"tests/{path}")
 
     pytest_args = build_pytest_args()
 
