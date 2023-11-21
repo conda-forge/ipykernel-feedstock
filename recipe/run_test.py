@@ -22,7 +22,11 @@ is_win = os_name == "nt"
 
 prefix = Path(os.environ["PREFIX"])
 
-rm_win_paths = ["test_embed_kernel.py"]
+# paths that fail to import durint collect phase on windows
+rm_win_paths = [
+    "test_embed_kernel.py",
+    "test_ipkernel_direct.py",
+]
 
 def check_kernel() -> int:
     print(f"Python implementation: {py_impl}")
