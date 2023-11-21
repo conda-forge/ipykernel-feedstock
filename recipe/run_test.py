@@ -9,6 +9,7 @@ from pathlib import Path
 # TODO: investigate upstream interrupt regression in 6.5.0
 test_skips = ["flaky", "interrupt"]
 
+os_name = os.name
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
@@ -17,7 +18,7 @@ machine = platform.machine().lower()
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
 is_pypy = py_impl == "pypy"
-is_win = platform.system() == "Windows"
+is_win = os_name == "nt"
 
 prefix = Path(os.environ["PREFIX"])
 
@@ -25,6 +26,7 @@ rm_win_paths = ["test_embed_kernel.py"]
 
 def check_kernel() -> int:
     print(f"Python implementation: {py_impl}")
+    print(f"                   OS: {os_name}")
     print(f"              Machine: {machine}")
 
     specfile = prefix / f"share/jupyter/kernels/python{py_major}/kernel.json"
@@ -86,8 +88,7 @@ def run_pytest():
     if is_win:
         # remove paths that don't import on windows
         for path in rm_win_paths:
-            if os.path.exists(f"tests/{path}"):
-                os.unlink(f"tests/{path}")
+            os.unlink(f"tests/{path}")
 
     pytest_args = build_pytest_args()
 
