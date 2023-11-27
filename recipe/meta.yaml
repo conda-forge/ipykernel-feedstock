@@ -1,4 +1,4 @@
-{% set version = "6.26.0" %}
+{% set version = "6.27.1" %}
 
 {% set migrating = false %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: 553856658eb8430bbe9653ea041a41bff63e9606fc4628873fc92a6cf3abd404
+  sha256: 7d5d594b6690654b4d299edba5e872dc17bb7396a8d0609c97cb7b8a1c605de6
 
 build:
   number: 0
@@ -31,12 +31,12 @@ requirements:
     - pip
     - python {{ host_python }}
     # minimum needed to intall kernelspec
-    - &comm_version comm >=0.1.1
-    - &debugpy_version debugpy >=1.6.5
-    - &ipython_version ipython >=7.23.1
-    - &jupyter_client_version jupyter_client >=6.1.12
-    - &packaging_version packaging
-    - &psutil_version psutil
+    - comm >=0.1.1
+    - debugpy >=1.6.5
+    - ipython >=7.23.1
+    - jupyter_client >=6.1.12
+    - packaging
+    - psutil
   run:
     - __{{ noarch_platform }}
     {% if noarch_platform == "osx" %}
@@ -50,12 +50,12 @@ requirements:
     - tornado >=6.1
     - traitlets >=5.4.0
     # reused from host
-    - *packaging_version
-    - *psutil_version
-    - *comm_version
-    - *debugpy_version
-    - *ipython_version
-    - *jupyter_client_version
+    - packaging
+    - psutil
+    - comm >=0.1.1
+    - debugpy >=1.6.5
+    - ipython >=7.23.1
+    - jupyter_client >=6.1.12
 
 test:
   source_files:
