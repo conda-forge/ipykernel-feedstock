@@ -46,7 +46,7 @@ requirements:
     - matplotlib-inline >=0.1
     - nest-asyncio
     - python >={{ host_python }}
-    - pyzmq >=20
+    - pyzmq >=24
     - tornado >=6.1
     - traitlets >=5.4.0
     # reused from host
