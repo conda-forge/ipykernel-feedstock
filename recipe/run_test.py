@@ -17,6 +17,7 @@ system = platform.system().lower()
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
 is_pypy = py_impl == "pypy"
+is_win = system == "windows"
 
 prefix = Path(os.environ["PREFIX"])
 
@@ -68,12 +69,11 @@ def build_pytest_args() -> typing.List[str]:
             "--no-cov-on-fail",
         ]
 
-    if system == "windows":
+    if is_win:
         # test_pickleutil fails on windows, `pickleutil` deprecated anyway, 
-        test_skips += [
+        test_skips.extend([
             "pickleutil",
-        ]
-
+        ])
 
     if len(test_skips) == 1:
         # single-term parens work unexpectedly
