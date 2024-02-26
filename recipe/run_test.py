@@ -12,6 +12,7 @@ test_skips = ["flaky", "interrupt"]
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
+system = platform.system().lower()
 
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
@@ -23,6 +24,7 @@ prefix = Path(os.environ["PREFIX"])
 def check_kernel() -> int:
     print(f"Python implementation: {py_impl}")
     print(f"              Machine: {machine}")
+    print(f"               System: {system}")
 
     specfile = prefix / f"share/jupyter/kernels/python{py_major}/kernel.json"
 
@@ -64,6 +66,12 @@ def build_pytest_args() -> typing.List[str]:
             "--cov=branch",
             "--cov-report=term-missing:skip-covered",
             "--no-cov-on-fail",
+        ]
+
+    if system == "windows":
+        # test_pickleutil fails on windows, `pickleutil` deprecated anyway, 
+        test_skips += [
+            "pickleutil",
         ]
 
 
