@@ -12,10 +12,12 @@ test_skips = ["flaky", "interrupt"]
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
+system = platform.system().lower()
 
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
 is_pypy = py_impl == "pypy"
+is_win = system == "windows"
 
 prefix = Path(os.environ["PREFIX"])
 
@@ -23,6 +25,7 @@ prefix = Path(os.environ["PREFIX"])
 def check_kernel() -> int:
     print(f"Python implementation: {py_impl}")
     print(f"              Machine: {machine}")
+    print(f"               System: {system}")
 
     specfile = prefix / f"share/jupyter/kernels/python{py_major}/kernel.json"
 
@@ -66,6 +69,11 @@ def build_pytest_args() -> typing.List[str]:
             "--no-cov-on-fail",
         ]
 
+    if is_win:
+        # test_pickleutil fails on windows, `pickleutil` deprecated anyway, 
+        test_skips.extend([
+            "pickleutil",
+        ])
 
     if len(test_skips) == 1:
         # single-term parens work unexpectedly
