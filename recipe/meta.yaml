@@ -1,4 +1,4 @@
-{% set version = "6.29.3" %}
+{% set version = "6.29.4" %}
 
 {% set migrating = false %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: e14c250d1f9ea3989490225cc1a542781b095a18a19447fcf2b5eaf7d0ac5bd2
+  sha256: 3d44070060f9475ac2092b760123fadf105d2e2493c24848b6691a7c4f42af5c
 
 build:
   number: 0
@@ -49,7 +49,6 @@ requirements:
     - pyzmq >=24
     - tornado >=6.1
     - traitlets >=5.4.0
-    # reused from host
     - packaging
     - psutil
     - comm >=0.1.1
