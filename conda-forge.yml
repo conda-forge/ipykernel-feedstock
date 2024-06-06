@@ -1,8 +1,10 @@
-conda_forge_output_validation: true
-test_on_native_only: true
 bot:
+  inspection: hint-all
   abi_migration_branches:
   - 5.x
+conda_build:
+  pkg_format: '2'
+conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
@@ -10,7 +12,4 @@ noarch_platforms:
 - linux_64
 - osx_64
 - win_64
-conda_build:
-  pkg_format: '2'
-bot:
-  inspection: hint-all
+test: native_and_emulated
