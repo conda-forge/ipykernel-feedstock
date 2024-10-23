@@ -1,4 +1,4 @@
-{% set version = "6.29.5" %}
+{% set version = "7.0.0a0" %}
 
 {% set migrating = false %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215
+  sha256: 143ed530d3930f55246ee3d0b50060962ff1270c271185d7b7832287445f3ecc
 
 build:
   number: 0
@@ -34,7 +34,7 @@ requirements:
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=6.1.12
+    - jupyter_client >=8.0.0
     - packaging
     - psutil
   run:
@@ -42,19 +42,19 @@ requirements:
     {% if noarch_platform == "osx" %}
     - appnope
     {% endif %}
+    - anyio >=4.2.0
+    - comm >=0.1.1
+    - debugpy >=1.8.1
+    - ipython >=7.23.1
+    - jupyter_client >=8.0.0
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
-    - nest-asyncio
+    - nest-asyncio >=1.4
+    - packaging >=22
+    - psutil >=5.7
     - python >={{ host_python }}
-    - pyzmq >=24
-    - tornado >=6.1
+    - pyzmq >=25.0
     - traitlets >=5.4.0
-    - packaging
-    - psutil
-    - comm >=0.1.1
-    - debugpy >=1.6.5
-    - ipython >=7.23.1
-    - jupyter_client >=6.1.12
 
 test:
   source_files:
@@ -64,8 +64,7 @@ test:
     - flaky
     - numpy
     - pip
-    # TODO: remove after release with https://github.com/ipython/ipykernel/pull/1231
-    - pytest >=7.0,<8
+    - pytest >=7.0,<9
     - pytest-asyncio >=0.23.5
     - pytest-cov
     - pytest-timeout
