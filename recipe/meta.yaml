@@ -4,7 +4,7 @@
 
 # note: make sure host python and test python don't match
 # to provoke possible cross-version noarch issues
-{% set host_python = "3.8" %}
+{% set host_python = "3.9" %}
 
 package:
   name: ipykernel
@@ -19,9 +19,8 @@ build:
   noarch: python
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-    - {{ PYTHON }} -m ipykernel install --sys-prefix
-    # TODO: this may be needed/desirable at some point
-    # - cd {{ RECIPE_DIR }} && {{ PYTHON }} fix_kernelspec.py
+    # this can fail due to a runtime assumption, but generally still writes the kernel
+    - {{ PYTHON }} -m ipykernel install --sys-prefix || ls {{ PREFIX }}/share/jupyter/kernels/python3/kernel.json || dir {{ PREFIX }}/share/jupyter/kernels/python3/kernel.json
   script_env:
     - MIGRATING={{ migrating }}
 
@@ -31,6 +30,7 @@ requirements:
     - pip
     - python {{ host_python }}
     # minimum needed to intall kernelspec
+    - anyio >=4.2.0
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
@@ -68,12 +68,11 @@ test:
     - pytest-asyncio >=0.23.5
     - pytest-cov
     - pytest-timeout
-    - python !={{ host_python }}
+    - python !={{ host_python }}.*
     {% if not migrating %}
     - ipyparallel
     - matplotlib-base
     {% endif %}
-
   imports:
     - ipykernel
   commands:
