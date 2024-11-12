@@ -40,14 +40,14 @@ Current release info
 Installing ipykernel
 ====================
 
-Installing `ipykernel` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `ipykernel` from the `conda-forge/label/ipykernel_alpha` channel can be achieved by adding `conda-forge/label/ipykernel_alpha` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/ipykernel_alpha
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `ipykernel` can be installed with `conda`:
+Once the `conda-forge/label/ipykernel_alpha` channel has been enabled, `ipykernel` can be installed with `conda`:
 
 ```
 conda install ipykernel
@@ -62,26 +62,26 @@ mamba install ipykernel
 It is possible to list all of the versions of `ipykernel` available on your platform with `conda`:
 
 ```
-conda search ipykernel --channel conda-forge
+conda search ipykernel --channel conda-forge/label/ipykernel_alpha
 ```
 
 or with `mamba`:
 
 ```
-mamba search ipykernel --channel conda-forge
+mamba search ipykernel --channel conda-forge/label/ipykernel_alpha
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search ipykernel --channel conda-forge
+mamba repoquery search ipykernel --channel conda-forge/label/ipykernel_alpha
 
 # List packages depending on `ipykernel`:
-mamba repoquery whoneeds ipykernel --channel conda-forge
+mamba repoquery whoneeds ipykernel --channel conda-forge/label/ipykernel_alpha
 
 # List dependencies of `ipykernel`:
-mamba repoquery depends ipykernel --channel conda-forge
+mamba repoquery depends ipykernel --channel conda-forge/label/ipykernel_alpha
 ```
 
 

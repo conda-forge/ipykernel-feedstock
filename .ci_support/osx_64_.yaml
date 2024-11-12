@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge ipykernel_alpha
 macos_machine:
 - x86_64-apple-darwin13.4.0
 noarch_platform:
