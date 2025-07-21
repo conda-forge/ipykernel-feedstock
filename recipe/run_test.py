@@ -7,7 +7,7 @@ import typing
 from pathlib import Path
 
 # TODO: investigate upstream interrupt regression in 6.5.0
-test_skips = ["flaky", "interrupt"]
+TEST_SKIPS = ["flaky", "interrupt"]
 
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
@@ -72,6 +72,7 @@ def build_pytest_args() -> typing.List[str]:
             "--no-cov-on-fail",
         ]
 
+    test_skips = [*TEST_SKIPS]
     if is_win:
         # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
         test_skips += [
