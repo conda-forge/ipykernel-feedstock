@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "6.29.5"
+  version: "6.30.0"
   migrating: "false"
   # versions needed in host/run
   comm_min: "0.1.1"
@@ -18,7 +18,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
-  sha256: f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215
+  sha256: b7b808ddb2d261aae2df3a26ff3ff810046e6de3dfbc6f7de8c98ea0a6cb632c
 
 build:
   number: 0
@@ -79,8 +79,7 @@ tests:
         - ipyparallel
         - matplotlib-base
         - numpy
-        # upstream claims <9, but fails with (at least) 8.4.1
-        - pytest >=7.0,<8
+        - pytest >=7.0,<9
         - pytest-asyncio >=0.23.5
         - pytest-cov
         - pytest-timeout
