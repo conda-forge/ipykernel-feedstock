@@ -11,13 +11,14 @@ context:
   jupyter_client_min: "8.0.0"
   packaging_min: "22"
   psutil_min: "5.7"
+  appnope_on_osx: ${{ "appnope >=0.1.2" if osx else "python" }}
 
 package:
   name: ipykernel
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
   sha256: b7b808ddb2d261aae2df3a26ff3ff810046e6de3dfbc6f7de8c98ea0a6cb632c
 
 build:
@@ -44,6 +45,7 @@ requirements:
     - psutil >=${{ psutil_min }}
   run:
     - __${{ noarch_platform }}
+    - ${{ appnope_on_osx }}
     - comm >=${{ comm_min }}
     - debugpy >=${{ debugpy_min }}
     - ipython >=${{ ipython_min }}
@@ -57,9 +59,6 @@ requirements:
     - pyzmq >=26
     - tornado >=6.2
     - traitlets >=5.4.0
-    - if: noarch_platform == "osx"
-      then:
-        - appnope >=0.1.2
 
 tests:
   - python:
