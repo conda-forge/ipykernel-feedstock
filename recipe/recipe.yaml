@@ -5,7 +5,7 @@ context:
   version: "6.29.5"
   migrating: "false"
   # versions needed in host/run
-  comm_version: "0.1.1"
+  comm_min: "0.1.1"
   debugpy_min: "1.6.5"
   ipython_min: "7.23.1"
   jupyter_client_min: "8.0.0"
@@ -36,7 +36,7 @@ requirements:
     - pip
     - python ${{ python_min }}.*
     # minimum needed to intall kernelspec
-    - comm >=${{ comm_version }}
+    - comm >=${{ comm_min }}
     - debugpy >=${{ debugpy_min }}
     - ipython >=${{ ipython_min }}
     - jupyter_client >=${{ jupyter_client_min }}
@@ -44,7 +44,7 @@ requirements:
     - psutil >=${{ psutil_min }}
   run:
     - __${{ noarch_platform }}
-    - comm >=${{ comm_version }}
+    - comm >=${{ comm_min }}
     - debugpy >=${{ debugpy_min }}
     - ipython >=${{ ipython_min }}
     - jupyter_client >=${{ jupyter_client_min }}
@@ -79,7 +79,8 @@ tests:
         - ipyparallel
         - matplotlib-base
         - numpy
-        - pytest >=7.0,<9
+        # upstream claims <9, but fails with (at least) 8.4.1
+        - pytest >=7.0,<8
         - pytest-asyncio >=0.23.5
         - pytest-cov
         - pytest-timeout

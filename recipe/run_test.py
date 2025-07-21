@@ -58,28 +58,27 @@ def build_pytest_args() -> typing.List[str]:
         "-vv",
         "--timeout=300",
         "--asyncio-mode=auto",
+        "--showlocals",
+        "--strict-markers",
+        "--strict-config",
     ]
 
     if py_impl != "pypy":
         # coverage is very slow on pypy
         pytest_args += [
             "--cov=ipykernel",
-            "--cov=branch",
+            "--cov-branch",
             "--cov-report=term-missing:skip-covered",
             "--no-cov-on-fail",
         ]
 
     if is_win:
-        # test_pickleutil fails on windows, `pickleutil` deprecated anyway, 
+        # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
         test_skips.extend([
             "pickleutil",
         ])
 
-    if len(test_skips) == 1:
-        # single-term parens work unexpectedly
-        pytest_args += ["-k", f"not {test_skips}"]
-    elif len(test_skips) > 1:
-        pytest_args += ["-k", f"""not ({" or ".join(test_skips)})"""]
+    pytest_args += ["-k", f"""not ({" or ".join(test_skips)})"""]
 
     return pytest_args
 
