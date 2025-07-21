@@ -3,7 +3,7 @@ About ipykernel-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ipykernel-feedstock/blob/main/LICENSE.txt)
 
-Home: https://ipython.org
+Home: https://ipython.org/
 
 Package license: BSD-3-Clause
 
@@ -11,11 +11,10 @@ Summary: IPython Kernel for Jupyter
 
 Development: https://github.com/ipython/ipykernel
 
-Documentation: https://ipython.readthedocs.io
+Documentation: https://ipython.readthedocs.io/
 
 A powerful interactive Python shell and a Jupyter kernel to work with
 Python code in Jupyter notebooks and other interactive frontends.
-
 
 Current build status
 ====================

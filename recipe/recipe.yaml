@@ -10,6 +10,7 @@ context:
   ipython_min: "7.23.1"
   jupyter_client_min: "8.0.0"
   packaging_min: "22"
+  psutil_min: "5.7"
 
 package:
   name: ipykernel
@@ -50,7 +51,7 @@ requirements:
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
     - nest-asyncio >=1.4
-    - packaging >=${{ packing_min }}
+    - packaging >=${{ packaging_min }}
     - psutil >=${{ psutil_min }}
     - python >=${{ python_min }}
     - pyzmq >=26
@@ -58,7 +59,7 @@ requirements:
     - traitlets >=5.4.0
     - if: noarch_platform == "osx"
       then:
-      - appnope
+      - appnope >=0.1.2
 
 tests:
   - python:
