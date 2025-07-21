@@ -30,6 +30,7 @@ build:
     content:
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
       - ${{ PYTHON }} -m ipykernel install --sys-prefix
+      - ${{ PYTHON }} ${{ RECIPE_DIR }}/fix_kernelspec.py
 
 requirements:
   host:
