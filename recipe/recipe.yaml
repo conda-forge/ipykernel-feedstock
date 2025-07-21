@@ -59,7 +59,7 @@ requirements:
     - traitlets >=5.4.0
     - if: noarch_platform == "osx"
       then:
-      - appnope >=0.1.2
+        - appnope >=0.1.2
 
 tests:
   - python:
