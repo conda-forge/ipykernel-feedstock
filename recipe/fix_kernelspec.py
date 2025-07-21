@@ -23,11 +23,13 @@ def main() -> int:
     print("Kernel python was:\n\t{}".format(spec["argv"][0]))
 
     if spec["argv"][0] == posix_exe:
-        print("Path is fine")
+        print("... OK")
     else:
-        print("Rewriting kernel python with:\n\t{}".format(posix_exe))
+        print("... rewriting kernel python with:\n\t{}".format(posix_exe))
         spec["argv"][0] = posix_exe
-        spec_path.write_text(json.dumps(spec, indent=2), **UTF8)
+        raw_spec = json.dumps(spec, indent=2)
+        print(raw_spec)
+        spec_path.write_text(raw_spec, **UTF8)
 
     return 0
 
