@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "6.29.5"
+  migrating: "false"
+  # versions needed in host/run
+  comm_version: "0.1.1"
+  debugpy_min: "1.6.5"
+  ipython_min: "7.23.1"
+  jupyter_client_min: "8.0.0"
+  packaging_min: "22"
+
+package:
+  name: ipykernel
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
+  sha256: f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215
+
+build:
+  number: 0
+  noarch: python
+  script:
+    env:
+      MIGRATING: ${{ migrating }}
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      - ${{ PYTHON }} -m ipykernel install --sys-prefix
+
+requirements:
+  host:
+    - hatchling >=1.4
+    - pip
+    - python ${{ python_min }}.*
+    # minimum needed to intall kernelspec
+    - comm >=${{ comm_version }}
+    - debugpy >=${{ debugpy_min }}
+    - ipython >=${{ ipython_min }}
+    - jupyter_client >=${{ jupyter_client_min }}
+    - packaging >=${{ packaging_min }}
+    - psutil >=${{ psutil_min }}
+  run:
+    - __${{ noarch_platform }}
+    - comm >=${{ comm_version }}
+    - debugpy >=${{ debugpy_min }}
+    - ipython >=${{ ipython_min }}
+    - jupyter_client >=${{ jupyter_client_min }}
+    - jupyter_core >=4.12,!=5.0.*
+    - matplotlib-inline >=0.1
+    - nest-asyncio >=1.4
+    - packaging >=${{ packing_min }}
+    - psutil >=${{ psutil_min }}
+    - python >=${{ python_min }}
+    - pyzmq >=26
+    - tornado >=6.2
+    - traitlets >=5.4.0
+    - if: noarch_platform == "osx"
+      then:
+      - appnope
+
+tests:
+  - python:
+      imports: ipykernel
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - 3.13.*
+  - files:
+      source:
+        - tests/
+      recipe:
+        - run_test.py
+    requirements:
+      run:
+        - if: not win
+          then: curio
+        - flaky
+        - numpy
+        - pytest >=7.0,<8
+        - pytest-asyncio >=0.23.5
+        - pytest-cov
+        - pytest-timeout
+        - ipyparallel
+        - matplotlib-base
+    script:
+      - jupyter kernelspec list
+      - python run_test.py
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: IPython Kernel for Jupyter
+  description: |
+    A powerful interactive Python shell and a Jupyter kernel to work with
+    Python code in Jupyter notebooks and other interactive frontends.
+  homepage: https://ipython.org
+  repository: https://github.com/ipython/ipykernel
+  documentation: https://ipython.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - blink1073
+    - bollwyvl
+    - Carreau
+    - jakirkham
+    - minrk
+    - ocefpaf
+    - pelson
+    - davidbrochart
