@@ -3,24 +3,34 @@ from pathlib import Path
 import sys
 import json
 
+UTF8 = {"encoding": "utf-8"}
+
 prefix = Path(os.environ["PREFIX"])
 kernel = "python{}".format(sys.version_info[0])
 spec_path = prefix / "share/jupyter/kernels" / kernel / "kernel.json"
 posix_exe = Path(sys.executable).as_posix()
 
-print("Rewriting kernelspec at:\n\t{}".format(spec_path))
 
-raw_spec = spec_path.read_text()
+def main() -> int:
+    print("Rewriting kernelspec at:\n\t{}".format(spec_path))
 
-print(raw_spec)
+    raw_spec = spec_path.read_text(**UTF8)
 
-spec = json.loads(raw_spec)
+    print(raw_spec)
 
-print("Kernel python was:\n\t{}".format(spec["argv"][0]))
+    spec = json.loads(raw_spec)
 
-if spec["argv"][0] == posix_exe:
-    print("Path is fine")
-else:
-    print("Rewriting kernel python with:\n\t{}".format(posix_exe))
-    spec["argv"][0] = posix_exe
-    spec_path.write_text(json.dumps(spec, indent=2))
+    print("Kernel python was:\n\t{}".format(spec["argv"][0]))
+
+    if spec["argv"][0] == posix_exe:
+        print("Path is fine")
+    else:
+        print("Rewriting kernel python with:\n\t{}".format(posix_exe))
+        spec["argv"][0] = posix_exe
+        spec_path.write_text(json.dumps(spec, indent=2), **UTF8)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
