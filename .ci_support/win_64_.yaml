@@ -5,4 +5,4 @@ channel_targets:
 noarch_platform:
 - win
 numpy:
-- '1.26'
+- '2'
