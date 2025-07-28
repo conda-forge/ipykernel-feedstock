@@ -10,3 +10,5 @@ noarch_platform:
 - linux
 numpy:
 - '2'
+python_min:
+- '3.9'
