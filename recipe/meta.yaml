@@ -34,9 +34,9 @@ requirements:
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=6.1.12
-    - packaging
-    - psutil
+    - jupyter_client >=8.0.0
+    - packaging >=22
+    - psutil >=5.7
   run:
     - __{{ noarch_platform }}
     {% if noarch_platform == "osx" %}
@@ -44,17 +44,17 @@ requirements:
     {% endif %}
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
-    - nest-asyncio
+    - nest-asyncio >=1.4
     - python >={{ host_python }}
-    - pyzmq >=24
-    - tornado >=6.1
+    - pyzmq >=25
+    - tornado >=6.2
     - traitlets >=5.4.0
-    - packaging
-    - psutil
+    - packaging >=22
+    - psutil >=5.7
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=6.1.12
+    - jupyter_client >=8.0.0
 
 test:
   source_files:
