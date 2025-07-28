@@ -2,10 +2,6 @@
 
 {% set migrating = false %}
 
-# note: make sure host python and test python don't match
-# to provoke possible cross-version noarch issues
-{% set host_python = "3.8" %}
-
 package:
   name: ipykernel
   version: {{ version }}
@@ -29,7 +25,7 @@ requirements:
   host:
     - hatchling >=1.4
     - pip
-    - python {{ host_python }}
+    - python {{ python_min }}.*
     # minimum needed to intall kernelspec
     - comm >=0.1.1
     - debugpy >=1.6.5
@@ -45,7 +41,7 @@ requirements:
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
     - nest-asyncio >=1.4
-    - python >={{ host_python }}
+    - python >={{ python_min }}
     - pyzmq >=25
     - tornado >=6.2
     - traitlets >=5.4.0
@@ -64,12 +60,11 @@ test:
     - flaky
     - numpy
     - pip
-    # TODO: remove after release with https://github.com/ipython/ipykernel/pull/1231
-    - pytest >=7.0,<8
+    - pytest >=7.0,<9
     - pytest-asyncio >=0.23.5
     - pytest-cov
     - pytest-timeout
-    - python !={{ host_python }}
+    - python !={{ python_min }}.*
     {% if not migrating %}
     - ipyparallel
     - matplotlib-base
@@ -91,7 +86,7 @@ about:
     A powerful interactive Python shell and a Jupyter kernel to work with
     Python code in Jupyter notebooks and other interactive frontends.
   dev_url: https://github.com/ipython/ipykernel
-  doc_url: https://ipython.readthedocs.io
+  doc_url: https://ipykernel.readthedocs.io
   doc_source_url: https://github.com/ipython/ipykernel/blob/master/docs/index.rst
 
 extra:
