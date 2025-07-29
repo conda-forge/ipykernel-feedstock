@@ -11,4 +11,6 @@ macos_machine:
 noarch_platform:
 - osx
 numpy:
-- '1.26'
+- '2'
+python_min:
+- '3.9'

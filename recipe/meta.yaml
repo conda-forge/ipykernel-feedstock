@@ -1,18 +1,14 @@
-{% set version = "6.29.5" %}
+{% set version = "6.30.0" %}
 
 {% set migrating = false %}
-
-# note: make sure host python and test python don't match
-# to provoke possible cross-version noarch issues
-{% set host_python = "3.8" %}
 
 package:
   name: ipykernel
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
-  sha256: f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215
+  url: https://pypi.org/packages/source/i/ipykernel/ipykernel-{{ version }}.tar.gz
+  sha256: b7b808ddb2d261aae2df3a26ff3ff810046e6de3dfbc6f7de8c98ea0a6cb632c
 
 build:
   number: 0
@@ -29,14 +25,14 @@ requirements:
   host:
     - hatchling >=1.4
     - pip
-    - python {{ host_python }}
+    - python {{ python_min }}.*
     # minimum needed to intall kernelspec
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=6.1.12
-    - packaging
-    - psutil
+    - jupyter_client >=8.0.0
+    - packaging >=22
+    - psutil >=5.7
   run:
     - __{{ noarch_platform }}
     {% if noarch_platform == "osx" %}
@@ -44,17 +40,17 @@ requirements:
     {% endif %}
     - jupyter_core >=4.12,!=5.0.*
     - matplotlib-inline >=0.1
-    - nest-asyncio
-    - python >={{ host_python }}
-    - pyzmq >=24
-    - tornado >=6.1
+    - nest-asyncio >=1.4
+    - python >={{ python_min }}
+    - pyzmq >=25
+    - tornado >=6.2
     - traitlets >=5.4.0
-    - packaging
-    - psutil
+    - packaging >=22
+    - psutil >=5.7
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=6.1.12
+    - jupyter_client >=8.0.0
 
 test:
   source_files:
@@ -64,12 +60,11 @@ test:
     - flaky
     - numpy
     - pip
-    # TODO: remove after release with https://github.com/ipython/ipykernel/pull/1231
-    - pytest >=7.0,<8
+    - pytest >=7.0,<9
     - pytest-asyncio >=0.23.5
     - pytest-cov
     - pytest-timeout
-    - python !={{ host_python }}
+    - python !={{ python_min }}.*
     {% if not migrating %}
     - ipyparallel
     - matplotlib-base
@@ -91,7 +86,7 @@ about:
     A powerful interactive Python shell and a Jupyter kernel to work with
     Python code in Jupyter notebooks and other interactive frontends.
   dev_url: https://github.com/ipython/ipykernel
-  doc_url: https://ipython.readthedocs.io
+  doc_url: https://ipykernel.readthedocs.io
   doc_source_url: https://github.com/ipython/ipykernel/blob/master/docs/index.rst
 
 extra:
