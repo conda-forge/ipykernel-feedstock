@@ -11,7 +11,7 @@ Summary: IPython Kernel for Jupyter
 
 Development: https://github.com/ipython/ipykernel
 
-Documentation: https://ipython.readthedocs.io
+Documentation: https://ipykernel.readthedocs.io
 
 A powerful interactive Python shell and a Jupyter kernel to work with
 Python code in Jupyter notebooks and other interactive frontends.
