@@ -3,6 +3,7 @@ schema_version: 1
 
 context:
   version: 7.0.0a2
+  appnope_on_osx: ${{ "appnope" if noarch_platform == "osx" else "python" }}
   migrating: false
 
 package:
@@ -37,6 +38,7 @@ requirements:
     - packaging >=22
     - psutil >=5.7
   run:
+    - ${{ appnope_on_osx }}
     - __${{ noarch_platform }}
     - comm >=0.1.1
     - debugpy >=1.6.5
@@ -51,9 +53,6 @@ requirements:
     - pyzmq >=25
     - tornado >=6.2
     - traitlets >=5.4.0
-    - if: noarch_platform == "osx"
-      then:
-        - appnope
 
 tests:
   - python:
