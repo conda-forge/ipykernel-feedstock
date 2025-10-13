@@ -54,6 +54,8 @@ requirements:
     - pyzmq >=25
     - tornado >=6.2
     - traitlets >=5.4.0
+  run_constraints:
+    - appnope >=0.1.2
 
 tests:
   - python:
