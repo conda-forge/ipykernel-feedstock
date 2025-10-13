@@ -70,21 +70,12 @@ def build_pytest_args() -> typing.List[str]:
         ]
 
     if is_win:
-        # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
         test_skips.extend(
             [
+                # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
                 "pickleutil",
             ]
         )
-        if sys.version_info >= (3, 14):
-            test_skips.extend(
-                [
-                    # event loop policy being investigated on jupyter_core
-                    "test_async_await",
-                    # unsure
-                    "debugger",
-                ]
-            )
 
     if len(test_skips) == 1:
         # single-term parens work unexpectedly
