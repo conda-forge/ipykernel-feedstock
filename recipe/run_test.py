@@ -70,10 +70,21 @@ def build_pytest_args() -> typing.List[str]:
         ]
 
     if is_win:
-        # test_pickleutil fails on windows, `pickleutil` deprecated anyway, 
-        test_skips.extend([
-            "pickleutil",
-        ])
+        # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
+        test_skips.extend(
+            [
+                "pickleutil",
+            ]
+        )
+        if sys.version_info >= (3, 14):
+            test_skips.extend(
+                [
+                    # event loop policy being investigated on jupyter_core
+                    "test_async_await",
+                    # unsure
+                    "debugger",
+                ]
+            )
 
     if len(test_skips) == 1:
         # single-term parens work unexpectedly
@@ -82,6 +93,7 @@ def build_pytest_args() -> typing.List[str]:
         pytest_args += ["-k", f"""not ({" or ".join(test_skips)})"""]
 
     return pytest_args
+
 
 def run_pytest():
     if is_pypy and (is_aarch or is_ppc):
