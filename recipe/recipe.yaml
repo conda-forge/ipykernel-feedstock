@@ -28,7 +28,7 @@ build:
 
 requirements:
   host:
-    - hatchling >=1.4
+    - hatchling >=1.22
     - pip
     - python ${{ python_min }}.*
     # minimum needed to intall kernelspec
