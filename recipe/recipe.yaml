@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.0.1"
+  version: "7.1.0"
   appnope_on_osx: ${{ "appnope" if noarch_platform == "osx" else "python" }}
   migrating: false
   python_check_max: "3.14"
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
-  sha256: 2d3fd7cdef22071c2abbad78f142b743228c5d59cd470d034871ae0ac359533c
+  sha256: 58a3fc88533d5930c3546dc7eac66c6d288acde4f801e2001e65edc5dc9cf0db
 
 build:
   number: 0
