@@ -11,4 +11,4 @@ macos_machine:
 noarch_platform:
 - osx
 python_min:
-- '3.9'
+- '3.10'
