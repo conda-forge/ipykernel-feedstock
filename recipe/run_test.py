@@ -18,6 +18,7 @@ is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
 is_pypy = py_impl == "pypy"
 is_win = system == "windows"
+is_linux = system == "linux"
 
 prefix = Path(os.environ["PREFIX"])
 
@@ -76,6 +77,11 @@ def build_pytest_args() -> typing.List[str]:
                 "pickleutil",
             ]
         )
+
+    if is_linux:
+        # getting x11 from yum isn't worth it
+        test_skips.append("matplotlib_gui")
+
 
     if len(test_skips) == 1:
         # single-term parens work unexpectedly
