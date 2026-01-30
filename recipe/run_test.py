@@ -5,8 +5,7 @@ import sys
 import pytest
 from pathlib import Path
 
-# TODO: investigate upstream interrupt regression in 6.5.0
-test_skips = ["flaky", "interrupt"]
+test_skips = []
 
 py_major = sys.version_info[0]
 py_impl = platform.python_implementation().lower()
