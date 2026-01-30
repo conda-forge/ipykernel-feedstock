@@ -3,7 +3,7 @@ About ipykernel-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ipykernel-feedstock/blob/main/LICENSE.txt)
 
-Home: https://ipython.org/
+Home: https://pypi.org/project/ipykernel
 
 Package license: BSD-3-Clause
 

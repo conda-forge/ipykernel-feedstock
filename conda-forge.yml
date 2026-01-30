@@ -1,5 +1,5 @@
 bot:
-  inspection: hint-all
+  inspection: hint-grayskull
 conda_build:
   pkg_format: "2"
 conda_build_tool: rattler-build
@@ -12,4 +12,3 @@ noarch_platforms:
   - linux_64
   - osx_64
   - win_64
-test: native_and_emulated

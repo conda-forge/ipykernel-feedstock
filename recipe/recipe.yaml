@@ -3,7 +3,6 @@ schema_version: 1
 
 context:
   version: "7.2.0a0"
-  migrating: false
   python_check_max: "3.14"
 
 package:
@@ -18,8 +17,6 @@ build:
   number: 0
   noarch: python
   script:
-    env:
-      MIGRATING: ${{ migrating }}
     content:
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
       - ${{ PYTHON }} -m ipykernel install --sys-prefix
@@ -44,14 +41,14 @@ requirements:
     - debugpy >=1.6.5
     - ipython >=7.23.1
     - jupyter_client >=8.0.0
-    - jupyter_core >=4.12,!=5.0.*
+    - jupyter_core >=5.1,!=6.0.*
     - matplotlib-inline >=0.1
     - nest-asyncio >=1.4
     - packaging >=22
     - psutil >=5.7
     - python >=${{ python_min }}
     - pyzmq >=25
-    - tornado >=6.2
+    - tornado >=6.4.1
     - traitlets >=5.4.0
   run_constraints:
     - appnope >=0.1.2
@@ -74,7 +71,7 @@ tests:
         - ipyparallel
         - matplotlib-base
         - numpy
-        - pytest >=7.0,<9
+        - pytest >=7.0,<10
         - pytest-asyncio >=0.23.5
         - pytest-cov
         - pytest-timeout
@@ -93,7 +90,7 @@ about:
   description: |
     A powerful interactive Python shell and a Jupyter kernel to work with
     Python code in Jupyter notebooks and other interactive frontends.
-  homepage: https://ipython.org
+  homepage: https://pypi.org/project/ipykernel
   repository: https://github.com/ipython/ipykernel
   documentation: https://ipykernel.readthedocs.io
 
