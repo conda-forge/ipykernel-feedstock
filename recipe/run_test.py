@@ -8,7 +8,6 @@ from pathlib import Path
 test_skips = []
 
 py_major = sys.version_info[0]
-py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
 system = platform.system().lower()
 
@@ -21,7 +20,6 @@ prefix = Path(os.environ["PREFIX"])
 
 
 def check_kernel() -> int:
-    print(f"Python implementation: {py_impl}")
     print(f"              Machine: {machine}")
     print(f"               System: {system}")
 
@@ -58,32 +56,17 @@ def build_pytest_args() -> list[str]:
         "--asyncio-mode=auto",
     ]
 
-    if py_impl != "pypy":
-        # coverage is very slow on pypy
-        pytest_args += [
-            "--cov=ipykernel",
-            "--cov=branch",
-            "--cov-report=term-missing:skip-covered",
-            "--no-cov-on-fail",
-        ]
-
     if is_win:
         # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
-        test_skips.extend(
-            [
-                "pickleutil",
-            ]
-        )
+        test_skips.append("pickleutil")
 
     if is_linux:
         # getting x11 from yum isn't worth it
-        test_skips.append("matplotlib_gui")
-
+        test_skips.appned("matplotlib_gui")
 
     if len(test_skips) == 1:
-        # single-term parens work unexpectedly
-        pytest_args += ["-k", f"not {test_skips}"]
-    elif len(test_skips) > 1:
+        pytest_args += ["-k", f"not {test_skips[0]}"]
+    elif test_skips:
         pytest_args += ["-k", f"""not ({" or ".join(test_skips)})"""]
 
     return pytest_args
