@@ -14,7 +14,6 @@ system = platform.system().lower()
 
 is_aarch = "aarch64" in machine
 is_ppc = "ppc" in machine
-is_pypy = py_impl == "pypy"
 is_win = system == "windows"
 is_linux = system == "linux"
 
@@ -91,10 +90,6 @@ def build_pytest_args() -> list[str]:
 
 
 def run_pytest():
-    if is_pypy and (is_aarch or is_ppc):
-        print(f"Skipping pytest on {machine} for {py_impl}")
-        return 0
-
     pytest_args = build_pytest_args()
 
     print("Final pytest args:", "\t".join(pytest_args), flush=True)
