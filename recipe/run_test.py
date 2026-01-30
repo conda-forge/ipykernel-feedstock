@@ -3,7 +3,6 @@ import os
 import platform
 import sys
 import pytest
-import typing
 from pathlib import Path
 
 # TODO: investigate upstream interrupt regression in 6.5.0
@@ -52,7 +51,7 @@ def check_kernel() -> int:
     return 0
 
 
-def build_pytest_args() -> typing.List[str]:
+def build_pytest_args() -> list[str]:
     pytest_args = [
         "--color=yes",
         "--tb=long",
@@ -99,16 +98,8 @@ def run_pytest():
 
     pytest_args = build_pytest_args()
 
-    print("Final pytest args:", pytest_args, flush=True)
-
-    # actually run the tests
-    rc = int(pytest.main(pytest_args))
-
-    if json.loads(os.environ.get("MIGRATING", "0").lower()):
-        print("Ignoring pytest failure due to on-going migration...")
-        return 0
-
-    return rc
+    print("Final pytest args:", "\t".join(pytest_args), flush=True)
+    return int(pytest.main(pytest_args))
 
 
 def main() -> int:
