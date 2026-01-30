@@ -11,8 +11,6 @@ py_major = sys.version_info[0]
 machine = platform.machine().lower()
 system = platform.system().lower()
 
-is_aarch = "aarch64" in machine
-is_ppc = "ppc" in machine
 is_win = system == "windows"
 is_linux = system == "linux"
 
@@ -62,7 +60,7 @@ def build_pytest_args() -> list[str]:
 
     if is_linux:
         # getting x11 from yum isn't worth it
-        test_skips.appned("matplotlib_gui")
+        test_skips.append("matplotlib_gui")
 
     if len(test_skips) == 1:
         pytest_args += ["-k", f"not {test_skips[0]}"]
