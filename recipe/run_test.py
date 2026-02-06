@@ -3,27 +3,21 @@ import os
 import platform
 import sys
 import pytest
-import typing
 from pathlib import Path
 
-# TODO: investigate upstream interrupt regression in 6.5.0
-test_skips = ["flaky", "interrupt"]
+test_skips = []
 
 py_major = sys.version_info[0]
-py_impl = platform.python_implementation().lower()
 machine = platform.machine().lower()
 system = platform.system().lower()
 
-is_aarch = "aarch64" in machine
-is_ppc = "ppc" in machine
-is_pypy = py_impl == "pypy"
 is_win = system == "windows"
+is_linux = system == "linux"
 
 prefix = Path(os.environ["PREFIX"])
 
 
 def check_kernel() -> int:
-    print(f"Python implementation: {py_impl}")
     print(f"              Machine: {machine}")
     print(f"               System: {system}")
 
@@ -51,7 +45,7 @@ def check_kernel() -> int:
     return 0
 
 
-def build_pytest_args() -> typing.List[str]:
+def build_pytest_args() -> list[str]:
     pytest_args = [
         "--color=yes",
         "--tb=long",
@@ -60,49 +54,27 @@ def build_pytest_args() -> typing.List[str]:
         "--asyncio-mode=auto",
     ]
 
-    if py_impl != "pypy":
-        # coverage is very slow on pypy
-        pytest_args += [
-            "--cov=ipykernel",
-            "--cov=branch",
-            "--cov-report=term-missing:skip-covered",
-            "--no-cov-on-fail",
-        ]
-
     if is_win:
-        test_skips.extend(
-            [
-                # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
-                "pickleutil",
-            ]
-        )
+        # test_pickleutil fails on windows, `pickleutil` deprecated anyway,
+        test_skips.append("pickleutil")
+
+    if is_linux:
+        # getting x11 from yum isn't worth it
+        test_skips.append("matplotlib_gui")
 
     if len(test_skips) == 1:
-        # single-term parens work unexpectedly
-        pytest_args += ["-k", f"not {test_skips}"]
-    elif len(test_skips) > 1:
+        pytest_args += ["-k", f"not {test_skips[0]}"]
+    elif test_skips:
         pytest_args += ["-k", f"""not ({" or ".join(test_skips)})"""]
 
     return pytest_args
 
 
 def run_pytest():
-    if is_pypy and (is_aarch or is_ppc):
-        print(f"Skipping pytest on {machine} for {py_impl}")
-        return 0
-
     pytest_args = build_pytest_args()
 
-    print("Final pytest args:", pytest_args, flush=True)
-
-    # actually run the tests
-    rc = int(pytest.main(pytest_args))
-
-    if json.loads(os.environ.get("MIGRATING", "0").lower()):
-        print("Ignoring pytest failure due to on-going migration...")
-        return 0
-
-    return rc
+    print("Final pytest args:", "\t".join(pytest_args), flush=True)
+    return int(pytest.main(pytest_args))
 
 
 def main() -> int:
