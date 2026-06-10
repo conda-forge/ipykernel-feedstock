@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.2.0"
+  version: "7.3.0"
   python_check_max: "3.14"
 
 package:
@@ -11,10 +11,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
-  sha256: 18ed160b6dee2cbb16e5f3575858bc19d8f1fe6046a9a680c708494ce31d909e
+  sha256: 9acaaaf97d16355166e4085afe9d225bfbdf2b7ef520f9df3be8f2b248275e09
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script:
     content:
@@ -40,10 +40,10 @@ requirements:
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=8.8.0
+    - jupyter_client >=8.9.0
     - jupyter_core >=5.1,!=6.0.*
     - matplotlib-inline >=0.1
-    - nest-asyncio >=1.4
+    - nest-asyncio2 >=1.7.0
     - packaging >=22
     - psutil >=5.7
     - python >=${{ python_min }}
