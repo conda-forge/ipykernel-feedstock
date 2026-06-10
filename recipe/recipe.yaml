@@ -40,10 +40,10 @@ requirements:
     - comm >=0.1.1
     - debugpy >=1.6.5
     - ipython >=7.23.1
-    - jupyter_client >=8.8.0
+    - jupyter_client >=8.9.0
     - jupyter_core >=5.1,!=6.0.*
     - matplotlib-inline >=0.1
-    - nest-asyncio >=1.4
+    - nest-asyncio2 >=1.7.0
     - packaging >=22
     - psutil >=5.7
     - python >=${{ python_min }}
