@@ -65,6 +65,7 @@ tests:
         - site-packages/ipykernel_launcher.py
       site_packages:
         - ipykernel/**
+        - ipykernel-${{ version }}.dist-info/**
   - python:
       imports: ipykernel
       pip_check: true
