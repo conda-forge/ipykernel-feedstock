@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.3.0"
+  version: "7.4.0"
   python_check_max: "3.14"
 
 package:
@@ -11,14 +11,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
-  sha256: 9acaaaf97d16355166e4085afe9d225bfbdf2b7ef520f9df3be8f2b248275e09
+  sha256: 4330114d22b9b33575b2c7c68753fc8faabbbcfbc60b0cdff9f14dd4ce63742f
 
 build:
   number: 0
   noarch: python
   script:
     content:
-      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --check-build-dependencies
       - ${{ PYTHON }} -m ipykernel install --sys-prefix
       - ${{ PYTHON }} ${{ RECIPE_DIR }}/fix_kernelspec.py
 
@@ -45,15 +45,27 @@ requirements:
     - matplotlib-inline >=0.1
     - nest-asyncio2 >=1.7.0
     - packaging >=22
-    - psutil >=5.7
     - python >=${{ python_min }}
     - pyzmq >=25
-    - tornado >=6.4.1
+    - tornado >=6.5.7
     - traitlets >=5.4.0
   run_constraints:
     - appnope >=0.1.2
 
 tests:
+  - package_contents:
+      strict: true
+      files:
+        - etc/conda/test-files/ipykernel/**
+        - share/jupyter/kernels/python3/kernel.json
+        - share/jupyter/kernels/python3/logo-32x32.png
+        - share/jupyter/kernels/python3/logo-64x64.png
+        - share/jupyter/kernels/python3/logo-svg.svg
+        # `rattler-build` apparently can't glob for singleton files in `site-packages`
+        - site-packages/ipykernel_launcher.py
+      site_packages:
+        - ipykernel/**
+        - ipykernel-${{ version }}.dist-info/**
   - python:
       imports: ipykernel
       pip_check: true
@@ -62,7 +74,7 @@ tests:
         - ${{ python_check_max }}.*
   - files:
       source:
-        - tests/
+        - tests/**
       recipe:
         - run_test.py
     requirements:
@@ -71,14 +83,12 @@ tests:
         - ipyparallel
         - matplotlib-base
         - numpy
+        - psutil>=5.7
         - pytest >=7.0,<10
         - pytest-asyncio >=0.23.5
         - pytest-cov
         - pytest-timeout
         - python ${{ python_min }}.*
-        - if: not win
-          then:
-            - curio
     script:
       - jupyter kernelspec list
       - python run_test.py
