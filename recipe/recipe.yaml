@@ -45,15 +45,26 @@ requirements:
     - matplotlib-inline >=0.1
     - nest-asyncio2 >=1.7.0
     - packaging >=22
-    - psutil >=5.7
     - python >=${{ python_min }}
     - pyzmq >=25
-    - tornado >=6.4.1
+    - tornado >=6.5.7
     - traitlets >=5.4.0
   run_constraints:
     - appnope >=0.1.2
 
 tests:
+  - package_contents:
+      strict: true
+      files:
+        - etc/conda/test-files/ipykernel/**
+        - share/jupyter/kernels/python3/kernel.json
+        - share/jupyter/kernels/python3/logo-32x32.png
+        - share/jupyter/kernels/python3/logo-64x64.png
+        - share/jupyter/kernels/python3/logo-svg.svg
+        # `rattler-build` apparently can't glob for singleton files in `site-packages`
+        - site-packages/ipykernel_launcher.py
+      site_packages:
+        - ipykernel/**
   - python:
       imports: ipykernel
       pip_check: true
@@ -62,7 +73,7 @@ tests:
         - ${{ python_check_max }}.*
   - files:
       source:
-        - tests/
+        - tests/**
       recipe:
         - run_test.py
     requirements:
@@ -71,14 +82,12 @@ tests:
         - ipyparallel
         - matplotlib-base
         - numpy
+        - psutil>=5.7
         - pytest >=7.0,<10
         - pytest-asyncio >=0.23.5
         - pytest-cov
         - pytest-timeout
         - python ${{ python_min }}.*
-        - if: not win
-          then:
-            - curio
     script:
       - jupyter kernelspec list
       - python run_test.py
