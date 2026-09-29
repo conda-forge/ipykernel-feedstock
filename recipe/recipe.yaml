@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.3.0"
+  version: "7.4.0"
   python_check_max: "3.14"
 
 package:
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/i/ipykernel/ipykernel-${{ version }}.tar.gz
-  sha256: 9acaaaf97d16355166e4085afe9d225bfbdf2b7ef520f9df3be8f2b248275e09
+  sha256: 4330114d22b9b33575b2c7c68753fc8faabbbcfbc60b0cdff9f14dd4ce63742f
 
 build:
   number: 0
